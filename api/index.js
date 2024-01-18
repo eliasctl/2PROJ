@@ -3,6 +3,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from './swagger_output.json' assert { type: 'json' };
 import Router from './routers/game.js';
+import image from './routers/images.js';
 const app = express()
 const port = 3001
 
@@ -17,6 +18,8 @@ app.use(function (req, res, next) {
 });
 
 app.use("/game", Router);
+
+app.use("/image", image)
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
