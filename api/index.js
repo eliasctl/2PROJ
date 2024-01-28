@@ -1,9 +1,9 @@
-import * as functions from './functions.js';
+// import * as functions from './functions.js';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from './swagger_output.json' assert { type: 'json' };
-import Router from './routers/game.js';
-import image from './routers/images.js';
+import game from './routers/game.js';
+import image from './routers/image.js';
 const app = express()
 const port = 3001
 
@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use("/game", Router);
+app.use("/game", game);
 
 app.use("/image", image)
 
@@ -27,13 +27,13 @@ app.get('/', (req, res) => {
     res.send('API 2PROJ Paris 1')
 })
 
-app.get('/user', (req, res) => {
-    res.send(functions.user());
-})
+// app.get('/user', (req, res) => {
+//     res.send(functions.user());
+// })
 
-app.get('/redirect', (req, res) => {
-    res.redirect('http://elidev.fr');
-})
+// app.get('/redirect', (req, res) => {
+//     res.redirect('http://elidev.fr');
+// })
 
 app.listen(port, () => {
     console.log(`The app are started on port ${port}`)
