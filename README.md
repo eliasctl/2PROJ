@@ -20,14 +20,18 @@ Demander à un des dévellopeur de vous le présenter
 Dans le terminale, inscrviez les commandes suivantes :
 
     - pip install pygame
-    - pip install 
+    - pip install
+    - cd api
+    - npm i
 
 ### 3. 
 
 
 # Utilisation
 
-    Pour lancer le projet : lancer le fichier menu.py dans le dossier game
+    Pour lancer le projet : 
+    - Ouvrez un terminal dans api et faites un npm run start
+    - lancer le fichier menu.py dans le dossier game
 
 # Fonctionnalités
 
