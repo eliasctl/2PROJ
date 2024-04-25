@@ -26,3 +26,15 @@ Dans le terminale, inscrviez les commandes suivantes :
 
 
 # Utilisation
+
+    Pour lancer le projet : lancer le fichier menu.py dans le dossier game
+
+# Fonctionnalités
+
+# Auteurs
+  Ce projet a été réalisé par :
+  
+  [Paul MARESCHI](https://github.com/Paul-Mrsch)
+  [Elias Castel](https://github.com/eliasctl)
+  [Clovis Kouoi](https://github.com/HTClaus)
+  [Adlane Benouhalima](https://github.com/Adeulaneuh)
