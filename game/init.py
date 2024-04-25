@@ -32,12 +32,12 @@ pygame.draw.rect(gameWindow, colorGrey, infosEmplacement)
 
 # Experience text
 font = pygame.font.Font(None, 48)
-expText = font.render("EXP: 0", True, (255, 255, 255))
+expText = font.render("XP: 0", True, (255, 255, 255))
 expText_rect = expText.get_rect(center=(infosEmplacement.width // 2, infosEmplacement.height // 4))
 gameWindow.blit(expText, expText_rect)
 
 # Gold text
-goldText = font.render("OR: 0", True, (255, 255, 255))
+goldText = font.render("GOLD: 0", True, (255, 255, 255))
 goldText_rect = goldText.get_rect(center=(infosEmplacement.width // 2, infosEmplacement.height // 4 * 3))
 gameWindow.blit(goldText, goldText_rect)
 
