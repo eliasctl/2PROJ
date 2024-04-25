@@ -1,0 +1,5 @@
+# Exclure tous les dossiers node_modules
+**/node_modules
+
+# Exclure tous les fichiers .DS_Store
+**/.DS_Store
