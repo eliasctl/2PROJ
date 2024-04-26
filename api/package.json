@@ -1,7 +1,7 @@
 {
   "name": "api_proj",
   "version": "1.0.0",
-  "description": "API pour le jeu Proj",
+  "description": "API for the 2Proj SupInfo",
   "main": "index.js",
   "type": "module",
   "scripts": {

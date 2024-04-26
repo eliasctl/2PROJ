@@ -19,7 +19,9 @@ app.use(function (req, res, next) {
 
 app.use("/game", game);
 
-app.use("/image", image)
+app.use("/match", match);
+
+app.use("/image", image);
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
