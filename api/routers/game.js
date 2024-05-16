@@ -17,6 +17,12 @@ game.get('/', async (req, res) => {
     }
 });
 
+game.post('/', async (req, res) => {
+    // quand on met ?entity=value dans l'url
+    console.log(req.query);
+    res.status(200).json({ message: 'POST request to the homepage' });
+});
+
 game.get('/background', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
