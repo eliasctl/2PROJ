@@ -2,6 +2,8 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 //import swaggerFile from './swagger_output.json' assert { type: 'json' };
+import swaggerFile from './swagger_output.json' with { type: "json" };
+//const swaggerFile = require('./swagger_output.json');
 import game from './routers/game.js';
 import image from './routers/image.js';
 const app = express()
@@ -23,7 +25,7 @@ app.use("/game", game);
 
 app.use("/image", image);
 
-//app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.get('/', (req, res) => {
     res.send('API 2PROJ Paris 1')

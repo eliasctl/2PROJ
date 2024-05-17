@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "API 2PROJ Paris 1",
     "version": "1.0.0",
-    "title": "REST API",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "localhost:3001",
   "basePath": "/",
   "schemes": [
     "http"
@@ -21,7 +21,7 @@
         }
       }
     },
-    "/game/background": {
+    "/game/": {
       "get": {
         "description": "",
         "responses": {
@@ -30,6 +30,82 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "player",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/game/get/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/game/joinGame": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "player",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "game",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -100,6 +176,19 @@
       }
     },
     "/image/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/image/background": {
       "get": {
         "description": "",
         "responses": {

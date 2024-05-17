@@ -17,22 +17,58 @@ game.get('/', async (req, res) => {
     }
 });
 
-game.post('/', async (req, res) => {
-    // quand on met ?entity=value dans l'url
-    console.log(req.query);
-    res.status(200).json({ message: 'POST request to the homepage' });
-});
-
-game.get('/background', async (req, res) => {
+game.get('/get/:id', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        const [rows] = await connection.execute('SELECT * FROM background');
+        const [rows] = await connection.execute('SELECT * FROM game WHERE id = ?', [req.params.id]);
 
-        res.status(200).json(rows);
+        if (rows.length > 0) {
+            res.status(200).json(rows[0]);
+        } else {
+            res.status(404).json({ error: 'Game not found' });
+        }
 
         await connection.end();
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+game.post('/', async (req, res) => {
+    try {
+        const connection = await mysql.createConnection(dbConfig);
+        const [rows] = await connection.execute('SELECT * FROM player WHERE id = ?', [req.query.player]);
+        if (rows.length > 0) {
+            const [game] = await connection.execute('INSERT INTO game (player1Id, player1Civilization, player2Civilization, player1HPCamp, player2HPCamp) VALUES (?, 1, 1, 5000, 5000)', [req.query.player]);
+            res.status(201).json({ id: game.insertId });
+        }
+        else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        res.status(400).json({ error: 'Bad request' });
+    }
+});
+
+game.put('/joinGame', async (req, res) => {
+    try {
+        const connection = await mysql.createConnection(dbConfig);
+        const [rows] = await connection.execute('SELECT * FROM player WHERE id = ?', [req.query.player]);
+        if (rows.length > 0) {
+            const [game] = await connection.execute('SELECT * FROM game WHERE player2Id IS NULL AND id = ?', [req.query.game]);
+            if (game.length > 0) {
+                await connection.execute('UPDATE game SET player2Id = ? WHERE id = ?', [req.query.player, req.query.game]);
+                res.status(200).json({ id: req.query.game });
+            }
+            else {
+                res.status(404).json({ error: 'Game not found or already full or ended' });
+            }
+        }
+        else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        res.status(400).json({ error: 'Bad request' });
     }
 });
 
