@@ -1,6 +1,7 @@
 import pygame
-import ctypes
 import requests
+import array
+from PIL import Image
 
 url = 'http://eliascastel.ddns.net:3001'
 
@@ -28,9 +29,8 @@ gameWindow = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
 # Set the colors
 colorGrey = (128, 128, 128)
 # colorBackground = (50, 137, 250)
-# gameWindow.fill(colorBackground)
-background = requests.get(url+'/image/10')
-print(background)
+response = requests.get(url+'/image/7')
+# Adlane
 
 
 
