@@ -77,6 +77,15 @@ rightLifeText = font.render("XXXhp", True, (255, 255, 255))
 rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - rightLifeBar.width // 2, rightLifeBar.centery + 25))
 gameWindow.blit(rightLifeText, rightLifeTextRect)
 
+# Troop 1
+troopSize = min(width, height) // 20
+troopRect = pygame.Rect(screen_width // 3 - troopSize // 2, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)
+
+# Render and display the troop
+troop1 = font.render("1", True, (255, 255, 255))
+troop1_rect = troop1.get_rect(center=troopRect.center)
+gameWindow.blit(troop1, troop1_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), troopRect, 2)
 
 # Screen refresh
 pygame.display.flip()
