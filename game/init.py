@@ -1,13 +1,17 @@
 import pygame
 import ctypes
+import requests
+
+url = 'http://eliascastel.ddns.net:3001'
 
 # Initialize pygame 
 pygame.init()
 
 # Get the screen size
-user32 = ctypes.windll.user32
-screen_width = user32.GetSystemMetrics(0)
-screen_height = user32.GetSystemMetrics(1)
+screen_info = pygame.display.Info()
+screen_width = screen_info.current_w
+screen_height = screen_info.current_h
+
 
 # Calculate the appropriate width and height while maintaining the aspect ratio
 aspect_ratio = screen_width / screen_height
@@ -23,8 +27,12 @@ gameWindow = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
 
 # Set the colors
 colorGrey = (128, 128, 128)
-colorBackground = (50, 137, 250)
-gameWindow.fill(colorBackground)
+# colorBackground = (50, 137, 250)
+# gameWindow.fill(colorBackground)
+background = requests.get(url+'/image/10')
+print(background)
+
+
 
 # Infos emplacement on the top left
 infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
@@ -86,6 +94,15 @@ troop1 = font.render("1", True, (255, 255, 255))
 troop1_rect = troop1.get_rect(center=troopRect.center)
 gameWindow.blit(troop1, troop1_rect)
 pygame.draw.rect(gameWindow, (255, 255, 255), troopRect, 2)
+
+# Button 1
+buttonSize = min(width, height) // 10
+buttonRect = pygame.Rect(screen_width // 2 - buttonSize // 2, screen_height * 9 // 10 - buttonSize // 2, buttonSize, buttonSize)
+# Render and display the button
+button1 = font.render("1", True, (255, 255, 255))
+button1_rect = button1.get_rect(center=buttonRect.center)
+gameWindow.blit(button1, button1_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), buttonRect, 2)
 
 # Screen refresh
 pygame.display.flip()
