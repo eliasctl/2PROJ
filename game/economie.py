@@ -15,9 +15,11 @@ class Player:
 
     def passive_income(self, duration):
         # Simulating passive XP income over a duration of time
-        xp_earned = random.randint(1, 10) * duration
+        xp_earned = random.randint(10, 100) * duration
+        gold_earned = random.randint(10, 50) * duration
         self.xp += xp_earned
-        print(f"Earned {xp_earned} XP passively.")
+        self.gold += gold_earned
+        print(f"Earned {xp_earned} XP and {gold_earned} passively.")
 
 player = Player()
 enemy_level = 3

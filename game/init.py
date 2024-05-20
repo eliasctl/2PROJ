@@ -14,6 +14,9 @@ screen_width = screen_info.current_w
 screen_height = screen_info.current_h
 
 
+# Set the caption of the window
+pygame.display.set_caption("My Game")
+
 # Calculate the appropriate width and height while maintaining the aspect ratio
 aspect_ratio = screen_width / screen_height
 if screen_width / screen_height > aspect_ratio:
@@ -86,23 +89,103 @@ rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - rightLifeBar.w
 gameWindow.blit(rightLifeText, rightLifeTextRect)
 
 # Troop 1
-troopSize = min(width, height) // 20
-troopRect = pygame.Rect(screen_width // 3 - troopSize // 2, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)
+troopSize = min(screen_width, screen_height) // 20
+troopRect = pygame.Rect(screen_width // 3.85 - troopSize // 2, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)
 
-# Render and display the troop
+# Render and display the troop (action button)
 troop1 = font.render("1", True, (255, 255, 255))
 troop1_rect = troop1.get_rect(center=troopRect.center)
 gameWindow.blit(troop1, troop1_rect)
 pygame.draw.rect(gameWindow, (255, 255, 255), troopRect, 2)
 
-# Button 1
-buttonSize = min(width, height) // 10
-buttonRect = pygame.Rect(screen_width // 2 - buttonSize // 2, screen_height * 9 // 10 - buttonSize // 2, buttonSize, buttonSize)
-# Render and display the button
-button1 = font.render("1", True, (255, 255, 255))
-button1_rect = button1.get_rect(center=buttonRect.center)
-gameWindow.blit(button1, button1_rect)
-pygame.draw.rect(gameWindow, (255, 255, 255), buttonRect, 2)
+# Troop 2
+troop2Rect = pygame.Rect(screen_width // 3.15 - troopSize, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)
+
+# Render and display the troop (action button)
+troop2 = font.render("2", True, (255, 255, 255))
+troop2_text_rect = troop2.get_rect(center=troop2Rect.center)
+gameWindow.blit(troop2, troop2_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), troop2Rect, 2)
+
+# Troop 3
+troop3Rect = pygame.Rect(screen_width // 2.8 - troopSize, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)
+
+# Render and display the troop (action button)
+troop3 = font.render("3", True, (255, 255, 255))
+troop3_text_rect = troop3.get_rect(center=troop3Rect.center)
+gameWindow.blit(troop3, troop3_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), troop3Rect, 2)
+
+# Turrets 1
+turretsSize = min(screen_width, screen_height) // 20
+turretsRect = pygame.Rect(screen_width // 2.4 - turretsSize, screen_height * 4 // 4.1 - turretsSize // 2, turretsSize, turretsSize)
+
+# Render and display the turrets (action button)
+turrets1 = font.render("t1", True, (255, 255, 255))
+turrets1_text_rect = turrets1.get_rect(center=turretsRect.center)
+gameWindow.blit(turrets1, turrets1_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), turretsRect, 2)
+
+# Turrets 2
+turretsSize = min(screen_width, screen_height) // 20
+turretsRect = pygame.Rect(screen_width // 2.19 - turretsSize, screen_height * 4 // 4.1 - turretsSize // 2, turretsSize, turretsSize)
+
+# Render and display the turrets (action button)
+turrets2 = font.render("t2", True, (255, 255, 255))
+turrets2_text_rect = turrets2.get_rect(center=turretsRect.center)
+gameWindow.blit(turrets2, turrets2_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), turretsRect, 2)
+
+# Turrets 3
+turretsSize = min(screen_width, screen_height) // 20
+turretsRect = pygame.Rect(screen_width // 2.01- turretsSize, screen_height * 4 // 4.1 - turretsSize // 2, turretsSize, turretsSize)
+
+# Render and display the turrets (action button)
+turrets3 = font.render("t3", True, (255, 255, 255))
+turrets3_text_rect = turrets3.get_rect(center=turretsRect.center)
+gameWindow.blit(turrets3, turrets3_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), turretsRect, 2)
+
+# Turrets 4
+turretsSize = min(screen_width, screen_height) // 20
+turretsRect = pygame.Rect(screen_width // 1.86- turretsSize, screen_height * 4 // 4.1 - turretsSize // 2, turretsSize, turretsSize)
+
+# Render and display the turrets (action button)
+turrets4 = font.render("t4", True, (255, 255, 255))
+turrets4_text_rect = turrets4.get_rect(center=turretsRect.center)
+gameWindow.blit(turrets4, turrets4_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), turretsRect, 2)
+
+# Turrets 5
+turretsSize = min(screen_width, screen_height) // 20
+turretsRect = pygame.Rect(screen_width // 1.73- turretsSize, screen_height * 4 // 4.1 - turretsSize // 2, turretsSize, turretsSize)
+
+# Render and display the turrets (action button)
+turrets5 = font.render("t5", True, (255, 255, 255))
+turrets5_text_rect = turrets5.get_rect(center=turretsRect.center)
+gameWindow.blit(turrets5, turrets5_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), turretsRect, 2)
+
+# NewEra
+EraSize = min(screen_width, screen_height) // 20
+EraRect = pygame.Rect(screen_width // 1.56 - EraSize, screen_height * 4 // 4.1 - EraSize // 2, EraSize, EraSize)
+
+# Render and display the Era (action button)
+Era = font.render("E1", True, (255, 255, 255))
+Era_text_rect = Era.get_rect(center=EraRect.center)
+gameWindow.blit(Era, Era_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), EraRect, 2)
+
+# Special Attack
+SaSize = min(screen_width, screen_height) // 20
+SaRect = pygame.Rect(screen_width // 1.47 - SaSize, screen_height * 4 // 4.1 - SaSize // 2, SaSize, SaSize)
+
+# Render and display the Era (action button)
+Sa = font.render("Sa", True, (255, 255, 255))
+Sa_text_rect = Sa.get_rect(center=SaRect.center)
+gameWindow.blit(Sa, Sa_text_rect)
+pygame.draw.rect(gameWindow, (255, 255, 255), SaRect, 2)
+
 
 # Screen refresh
 pygame.display.flip()
