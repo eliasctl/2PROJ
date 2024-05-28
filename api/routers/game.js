@@ -72,6 +72,16 @@ game.put('/joinGame', async (req, res) => {
     }
 });
 
+game.put('/data', async (req, res) => {
+    try {
+        const connection = await mysql.createConnection(dbConfig);
+        await connection.execute('UPDATE game SET player1Civilization = ?, player2Civilization = ?, player1HPCamp = ?, player2HPCamp = ?, field = ?, player1SpecialCapacity = ?, player2SpecialCapacity = ?, player1Turrets1 = ?, player1Turrets2 = ?, player1Turrets3 = ?, player2Turrets1 = ?, player2Turrets2 = ?, player2Turrets3 = ? WHERE id = ?', [req.query.player1Civilization, req.query.player2Civilization, req.query.player1HPCamp, req.query.player2HPCamp, req.query.field, req.query.player1SpecialCapacity, req.query.player2SpecialCapacity, req.query.player1Turrets1, req.query.player1Turrets2, req.query.player1Turrets3, req.query.player2Turrets1, req.query.player2Turrets2, req.query.player2Turrets3, req.query.game]);
+        res.status(200).json({ message: 'Data updated' });
+    } catch (error) {
+        res.status(400).json({ error: 'Bad request' });
+    }
+});
+
 game.get('/camps', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);

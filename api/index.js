@@ -6,6 +6,7 @@ import swaggerFile from './swagger_output.json' with { type: "json" };
 //const swaggerFile = require('./swagger_output.json');
 import game from './routers/game.js';
 import image from './routers/image.js';
+import player from './routers/player.js';
 const app = express()
 const port = 3001
 
@@ -24,6 +25,8 @@ app.use("/game", game);
 //app.use("/match", match);
 
 app.use("/image", image);
+
+app.use("/player", player);
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 

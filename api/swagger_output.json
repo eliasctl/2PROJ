@@ -110,6 +110,91 @@
         }
       }
     },
+    "/game/data": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "player1Civilization",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Civilization",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1HPCamp",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2HPCamp",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "field",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1SpecialCapacity",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2SpecialCapacity",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1Turrets1",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1Turrets2",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1Turrets3",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Turrets1",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Turrets2",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Turrets3",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "game",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/game/camps": {
       "get": {
         "description": "",
@@ -218,6 +303,47 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/player/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
