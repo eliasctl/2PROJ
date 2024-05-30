@@ -1,4 +1,5 @@
 import pygame
+import pygame.mixer
 
 # Initialisation de Pygame
 pygame.init()
@@ -120,6 +121,9 @@ class Slider:
         normalized_position = (new_value - self.rect.x) / self.rect.width
         self.value = round(self.min_value + normalized_position * (self.max_value - self.min_value))
 
+    def get_value(self):
+        # Return the current value of the slider
+        return self.value
 # Classe pour le menu déroulant
 class Dropdown:
     def __init__(self, x, y, width, height, options, default_option, text):
@@ -206,11 +210,20 @@ sfx_text_box = TextBox(10, 150, 50, 30, "SFX")
 music_text_box = TextBox(10, 100, 50, 30, "MUSIC")
 help_text_box = TextBox(10, 210, 50, 30, "HELP")
 language_text_box = TextBox(10, 260, 50, 30, "LANGUAGE")
+# Chargement de la musique
+pygame.mixer.music.load("Music\With Gun & Crucifix - Epic Rock Orchestral Music.mp3")
 
+# Lecture en boucle de la musique
+pygame.mixer.music.play(-1)
+
+# Variables de volume initial
+music_volume = 0.5
+sfx_volume = 0.5
 
 # Création du curseur (slider) dans les paramètres
 slider = Slider(200, 150, 200, 20, 0, 100, 50, "SFX")
 slider2 = Slider(200, 100, 200, 20, 0, 100, 50, "Music")
+
 
 # Création du menu déroulant pour la langue
 language_dropdown = Dropdown(200, 250, 200, 30, language_options, "English", "Language")
@@ -284,14 +297,18 @@ while running:
                 elif slider.is_clicked(pygame.mouse.get_pos()):
                     # Met à jour la valeur du curseur en fonction de la position du clic
                     slider.update_value(pygame.mouse.get_pos()[0])
+                # Inside the loop where the slider is being updated
                 elif slider2.is_clicked(pygame.mouse.get_pos()):
-                    # Met à jour la valeur du curseur en fonction de la position du clic
                     slider2.update_value(pygame.mouse.get_pos()[0])
+                    music_volume = slider2.get_value() * 0.01  
+                    pygame.mixer.music.set_volume(music_volume)
+
                 elif language_dropdown.is_clicked(pygame.mouse.get_pos()):
                     # Gérer le clic sur le menu déroulant
                     language_dropdown.handle_click(pygame.mouse.get_pos())
                 if help_button.is_clicked(pygame.mouse.get_pos()):
                     print("I'm Johnny on the spot")
+                    
 
     # Effacer l'écran
     window.fill(BLACK)
