@@ -216,7 +216,7 @@ def menu():
     help_text_box = TextBox(10, 210, 50, 30, "HELP")
     language_text_box = TextBox(10, 260, 50, 30, "LANGUAGE")
     # Chargement de la musique
-    pygame.mixer.music.load("Music\Rick Astley - Never Gonna Give You Up (Instrumental) HD Audio.mp3")
+    pygame.mixer.music.load("Music\Killer.mp3")
 
     # Lecture en boucle de la musique
     pygame.mixer.music.play(-1)
