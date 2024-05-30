@@ -32,7 +32,10 @@ gameWindow = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
 # Set the colors
 colorGrey = (128, 128, 128)
 # colorBackground = (50, 137, 250)
-response = requests.get(url+'/image/7')
+# Load the background image
+backgroundImage = pygame.image.load("game/tempImages/Samurai.png")
+backgroundImage = pygame.transform.scale(backgroundImage, (width, height))
+gameWindow.blit(backgroundImage, (0, 0))
 # Adlane
 
 
@@ -60,13 +63,13 @@ settingRect.topright = (screen_width - 20 , 20)
 gameWindow.blit(settingImage, settingRect)
 
 # Base image on the left and right
-baseImage = pygame.image.load("game/tempImages/base.png")
+baseImage = pygame.image.load("game/tempImages/samuraihut.png")
 leftBaseRect = baseImage.get_rect()
-leftBaseRect.topleft = (0, screen_height // 1.8 - leftBaseRect.height // 2)
+leftBaseRect.topleft = (0, screen_height // 1.3 - leftBaseRect.height // 2)
 gameWindow.blit(baseImage, leftBaseRect)
 
 rightBaseRect = baseImage.get_rect()
-rightBaseRect.topright = (screen_width, screen_height // 1.8 - rightBaseRect.height // 2)
+rightBaseRect.topright = (screen_width, screen_height // 1.3 - rightBaseRect.height // 2)
 gameWindow.blit(baseImage, rightBaseRect)
 
 # Life bar
