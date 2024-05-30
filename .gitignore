@@ -3,3 +3,5 @@
 
 # Exclure tous les fichiers .DS_Store
 **/.DS_Store
+
+test/
