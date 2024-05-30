@@ -1,6 +1,6 @@
 import pygame
 import pygame.mixer
-from game import Translation
+
 
 # Initialisation de Pygame
 pygame.init()
@@ -32,10 +32,7 @@ class Button:
 
     def draw(self):
         pygame.draw.rect(window, WHITE, self.rect)
-        text_surface = font.render(translations[selected_language]["start_button"], True, BLACK)
-
-
-
+        text_surface = font.render(self.text, True, BLACK)
         text_rect = text_surface.get_rect(center=self.rect.center)
         window.blit(text_surface, text_rect)
 
