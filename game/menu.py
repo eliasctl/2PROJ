@@ -9,6 +9,12 @@ window_height = 600
 window = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption("Game Menu")
 
+# Chargement de l'image de fond
+background_image = pygame.image.load("game/tempImages/Nature.png")
+# Redimensionnement de l'image de fond pour correspondre à la taille de la fenêtre
+background_image = pygame.transform.scale(background_image, (window_width, window_height))
+# Affichage de l'image de fond
+
 # Définition des couleurs
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -169,12 +175,14 @@ impossible_button = Button(300, 400, 200, 50, "Impossible")
 
 # Création d'une boîte de texte pour les instructions avec des paragraphes
 instructions_text_box = TextBox(50, 50, 700, 400, """
-Age of War is an epic strategy game where you defend your base and conquer the enemy through five ages, from the Stone Age to modern civilization.
+Age of War is an epic strategy game where you defend your base
+and conquer the enemy through five ages,from the Stone Age 
+to modern civilization.
 
 Game Highlights:
 - Battle across Stone, Castle, Renaissance, Modern, and Future ages.
 - Choose your difficulty level.
-- Defend with stones and sticks in the Stone Age, advancing with new technologies.
+- Defend with stones and sticks in the Stone Age and evolve.
 - Build turrets, deploy units, and strategically use special attacks.
 - Monitor the health bar; if it reaches zero, you lose.
 - Earn money and experience to unlock 16 different units.
