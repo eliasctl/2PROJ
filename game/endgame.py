@@ -12,7 +12,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Endgame Credits")
 
 # Set up fonts
-font = pygame.font.SysFont("Arial", 36, bold=True)
+font = pygame.font.SysFont("Arial", 36 , bold=True)
 
 # Set up colors
 WHITE = (255, 255, 255)
