@@ -63,7 +63,7 @@ settingRect.topright = (screen_width - 20 , 20)
 gameWindow.blit(settingImage, settingRect)
 
 # Base image on the left and right
-baseImage = pygame.image.load("game/tempImages/samuraihut.png")
+baseImage = pygame.image.load("game/tempImages/base.png")
 leftBaseRect = baseImage.get_rect()
 leftBaseRect.topleft = (0, screen_height // 1.3 - leftBaseRect.height // 2)
 gameWindow.blit(baseImage, leftBaseRect)
