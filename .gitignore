@@ -5,3 +5,6 @@
 **/.DS_Store
 
 test/
+
+# Exclure tous les fichiers _pycache_
+**/__pycache__
