@@ -1,5 +1,6 @@
 import pygame
 import sys
+import pygame.mixer
 
 # Initialize Pygame
 pygame.init()
@@ -30,6 +31,15 @@ credits = [
 
 # Set up scrolling speed
 scroll_speed = 1
+# Background music
+pygame.mixer.music.load("Music\With Gun & Crucifix - Epic Rock Orchestral Music.mp3")
+pygame.mixer.music.play(-1)
+
+#The volume of the music
+pygame.mixer.music.set_volume(0.5)
+
+
+
 
 # Main loop
 def run_game():
