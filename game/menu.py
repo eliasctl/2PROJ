@@ -1,6 +1,7 @@
 import pygame
 import pygame.mixer
 
+
 # Initialisation de Pygame
 pygame.init()
 
@@ -302,10 +303,9 @@ while running:
                     slider2.update_value(pygame.mouse.get_pos()[0])
                     music_volume = slider2.get_value() * 0.01  
                     pygame.mixer.music.set_volume(music_volume)
-
                 elif language_dropdown.is_clicked(pygame.mouse.get_pos()):
-                    # Gérer le clic sur le menu déroulant
                     language_dropdown.handle_click(pygame.mouse.get_pos())
+                    selected_language = language_dropdown.selected_option
                 if help_button.is_clicked(pygame.mouse.get_pos()):
                     print("I'm Johnny on the spot")
                     
