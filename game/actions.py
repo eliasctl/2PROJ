@@ -11,15 +11,15 @@
 
 """
 
-def buyTroop():
+def buyTroop(idTroop):
     pass
 
-def buySpell():
+def buySpell(idSpell):
     pass
 
-def buyTurret():
+def buyTurret(idTurret):
     pass
 
-def evolve():
+def evolve(idCivilization):
     pass
     
