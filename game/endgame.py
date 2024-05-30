@@ -38,7 +38,7 @@ start_y = SCREEN_HEIGHT + 100  # Starting y position
 end_y = SCREEN_HEIGHT - 200  # Ending y position
 
 # Background music
-pygame.mixer.music.load("Music\With Gun & Crucifix - Epic Rock Orchestral Music.mp3")
+pygame.mixer.music.load("Music\Rick Astley - Never Gonna Give You Up (Instrumental) HD Audio.mp3")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.5)
 
