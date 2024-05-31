@@ -313,10 +313,8 @@ def menu():
                         language_dropdown.handle_click(pygame.mouse.get_pos())
                         selected_language = language_dropdown.selected_option
                     if help_button.is_clicked(pygame.mouse.get_pos()):
-
-                    
                         # Open email client with pre-filled message
-                        email_url = "mailto:clovis.kouoi@supinfo.com?subject=Help Request&body=" 
+                        email_url = "mailto:clovis.kouoi@supinfo.com;paul.mareschi@supinfo.com;adlane.benouhalima@supinfo.com;elias.moussa-osman@supinfo.com?subject=Help Request&body=" 
                         webbrowser.open(email_url)
 
 
