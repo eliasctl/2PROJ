@@ -119,7 +119,7 @@ def updateField(field, gameWindow, waitingList):
                     pass
                 
                 # Test if the troop has an enemy to attack in his range
-                if (field[element-1][0] == 1):
+                if (field[element - 1][0] == 1):
 
                     # Attack the troop in front of him
                     field[element-1][3] -= field[element][4]

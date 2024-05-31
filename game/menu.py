@@ -1,6 +1,7 @@
 import pygame
 from googletrans import Translator
 import webbrowser
+import subprocess
 
 
 import pygame.mixer
@@ -130,45 +131,7 @@ def menu():
             # Return the current value of the slider
             return self.value
 
-    # Classe pour le menu déroulant
-    class Dropdown:
-        def __init__(self, x, y, width, height, options, default_option, text):
-            self.rect = pygame.Rect(x, y, width, height)
-            self.options = options
-            self.selected_option = default_option
-            self.expanded = False
-            self.text = text
-
-        def draw(self):
-            pygame.draw.rect(window, WHITE, self.rect)
-            pygame.draw.rect(window, BLACK, self.rect, 2)
-
-            text_surface = font.render(f"{self.text}: {self.selected_option}", True, BLACK)
-            text_rect = text_surface.get_rect(topleft=(self.rect.right + 10, self.rect.y))
-            window.blit(text_surface, text_rect)
-
-            if self.expanded:
-                for i, option in enumerate(self.options):
-                    option_rect = pygame.Rect(self.rect.x, self.rect.y + (i + 1) * self.rect.height, self.rect.width, self.rect.height)
-                    pygame.draw.rect(window, WHITE, option_rect)
-                    pygame.draw.rect(window, BLACK, option_rect, 2)
-                    option_surface = font.render(option, True, BLACK)
-                    option_rect = option_surface.get_rect(topleft=(self.rect.x + 5, self.rect.y + (i + 1) * self.rect.height + 5))
-                    window.blit(option_surface, option_rect)
-
-        def is_clicked(self, pos):
-            return self.rect.collidepoint(pos)
-
-        def handle_click(self, pos):
-            if self.is_clicked(pos):
-                self.expanded = not self.expanded
-                print("Selected option:", self.selected_option)
-            elif self.expanded:
-                for i, option in enumerate(self.options):
-                    option_rect = pygame.Rect(self.rect.x, self.rect.y + (i + 1) * self.rect.height, self.rect.width, self.rect.height)
-                    if option_rect.collidepoint(pos):
-                        self.selected_option = option
-                        self.expanded = False
+    
 
     # Liste de langues pour le menu déroulant
     language_options = ["English", "Français", "Español", "Deutsch", "Italiano", "Português"]
@@ -231,11 +194,11 @@ def menu():
     slider = Slider(200, 150, 200, 20, 0, 100, 50, "SFX")
     slider2 = Slider(200, 100, 200, 20, 0, 100, 50, "Music")
 
-    # Création du menu déroulant pour la langue
-    language_dropdown = Dropdown(200, 250, 200, 30, language_options, "English", "Language")
-
     # Création du bouton Help
     help_button = Button(200, 200, 200, 30, "Send a message")
+
+    #création d'un bouton translation
+    translation_button = Button(200, 250, 200, 30, "Translate")
 
     # Boucle de jeu
     running = True
@@ -309,13 +272,12 @@ def menu():
                         slider2.update_value(pygame.mouse.get_pos()[0])
                         music_volume = slider2.get_value() * 0.01  
                         pygame.mixer.music.set_volume(music_volume)
-                    elif language_dropdown.is_clicked(pygame.mouse.get_pos()):
-                        language_dropdown.handle_click(pygame.mouse.get_pos())
-                        selected_language = language_dropdown.selected_option
                     if help_button.is_clicked(pygame.mouse.get_pos()):
                         # Open email client with pre-filled message
                         email_url = "mailto:clovis.kouoi@supinfo.com;paul.mareschi@supinfo.com;adlane.benouhalima@supinfo.com;elias.moussa-osman@supinfo.com?subject=Help Request&body=" 
                         webbrowser.open(email_url)
+                    if translation_button.is_clicked(pygame.mouse.get_pos()):
+                        subprocess.run(["python", "/Users/ab/Desktop/2PROJ/game/Translation.py"])
 
 
         # Effacer l'écran
@@ -337,9 +299,9 @@ def menu():
             language_text_box.draw()
             slider.draw()
             slider2.draw()
-            language_dropdown.draw()
             help_button.draw()  # Dessiner le bouton "Test"
             help_text_box.draw()
+            translation_button.draw()
 
         # Dessiner les boutons
 
@@ -367,4 +329,4 @@ def menu():
     pygame.quit()
 
 # Call the menu function to start the menu
-# menu()
+#menu()
