@@ -363,4 +363,4 @@ def menu():
     pygame.quit()
 
 # Call the menu function to start the menu
-menu()
+# menu()
