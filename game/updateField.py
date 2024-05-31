@@ -18,7 +18,11 @@ import json
 # my_dict_json = json.dumps(my_dict)
 
 
-def updateField(field, gameWindow, waitingList):
+def updateField(field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp):
+    if field == None:
+        field = {}
+        for i in range(25):
+            field[i] = [0, 0, 0, 0, 0]
     
     # Loop throught the field for player 1
     for element in reversed(field):
@@ -28,9 +32,8 @@ def updateField(field, gameWindow, waitingList):
 
                 # Test if the troop can attack the camp
                 if element == 22:
-                    print("Camp attack")
-                    ######################
-                    pass
+                    # Camp attack
+                    player2HPCamp -= field[element][4]
 
                 # Test if the troop has an enemy to attack in his range
                 if (field[element+1][0] == 2) or (field[element+2][0] == 2) or (field[element+3][0] == 2):
@@ -59,9 +62,8 @@ def updateField(field, gameWindow, waitingList):
 
                 # Test if the troop can attack the camp
                 if element == 24:
-                    print("Camp attack")
-                    ######################
-                    pass
+                    # Camp attack
+                    player2HPCamp -= field[element][4]
                 
                 # Test if the troop has an enemy to attack in his range
                 if (field[element+1][0] == 2):
@@ -84,9 +86,8 @@ def updateField(field, gameWindow, waitingList):
 
                 # Test if the troop can attack the camp
                 if element == 2:
-                    print("Camp attack")
-                    ######################
-                    pass
+                    # Camp attack
+                    player1HPCamp -= field[element][4]
 
                 # Test if the troop has an enemy to attack in his range
                 if (field[element-1][0] == 1) or (field[element-2][0] == 1) or (field[element-3][0] == 1):
@@ -114,9 +115,8 @@ def updateField(field, gameWindow, waitingList):
 
                 # Test if the troop can attack the camp
                 if element == 0:
-                    print("Camp attack")
-                    ######################
-                    pass
+                    # Camp attack
+                    player1HPCamp -= field[element][4]
                 
                 # Test if the troop has an enemy to attack in his range
                 if (field[element - 1][0] == 1):
@@ -130,7 +130,21 @@ def updateField(field, gameWindow, waitingList):
                 elif field[element-1][0] == 0:
                     field[element-1] = field[element]
                     field[element] = [0, 0, 0, 0, 0]
-    return field
+
+    if waitingListPlayer1 != None and field[0] == [0, 0, 0, 0, 0]:
+        field[0] = waitingListPlayer1[0]
+        waitingListPlayer1.pop(0)
+    if waitingListPlayer2 != None and field[24] == [0, 0, 0, 0, 0]:
+        field[24] = waitingListPlayer2[0]
+        waitingListPlayer2.pop(0)
+
+    if player1HPCamp <= 0:
+        print("Player 2 wins")
+    elif player2HPCamp <= 0:
+        print("Player 1 wins")
+    
+
+    return (field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp)
 
 
 newField = {}

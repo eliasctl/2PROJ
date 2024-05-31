@@ -22,7 +22,7 @@ def game(gameWindow, idGame, idPlayer):
                 running = False
 
         # Update the game field
-        updateField(game["field"], gameWindow, None) #, game["waitingList"])
+        # game["field"], test, test2, game["player1HPCamp"], game["player2HPCamp"] = updateField(game["field"], None, None, game["player1HPCamp"], game["player2HPCamp"]) #, game["waitingListPlayer1"], game["waitingListPlayer2"]
         # print(game)
         # game["game"] = game.pop("id")
         # game.pop("player1Id")
