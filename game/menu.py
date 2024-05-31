@@ -277,7 +277,7 @@ def menu():
                         email_url = "mailto:clovis.kouoi@supinfo.com;paul.mareschi@supinfo.com;adlane.benouhalima@supinfo.com;elias.moussa-osman@supinfo.com?subject=Help Request&body=" 
                         webbrowser.open(email_url)
                     if translation_button.is_clicked(pygame.mouse.get_pos()):
-                        subprocess.run(["python", "/Users/ab/Desktop/2PROJ/game/Translation.py"])
+                        subprocess.run(["python", "game/Translation.py"])
 
 
         # Effacer l'écran
@@ -329,4 +329,4 @@ def menu():
     pygame.quit()
 
 # Call the menu function to start the menu
-#menu()
+menu()
