@@ -26,10 +26,28 @@ def updateField(field, gameWindow, waitingList):
             # Test if the troop is a ranged troop
             if field[element][2] == 2:
 
+                # Test if the troop can attack the camp
+                if element == 22:
+                    print("Camp attack")
+                    ######################
+                    pass
+
                 # Test if the troop has an enemy to attack in his range
                 if (field[element+1][0] == 2) or (field[element+2][0] == 2) or (field[element+3][0] == 2):
                     # Attack the troop in front of him
-                    pass
+                    if field[element+1][0] == 2:
+                        field[element+1][3] -= field[element][4]
+                        if field[element+1][3] <= 0:
+                            field[element+1] = [0, 0, 0, 0, 0]
+                    elif field[element+2][0] == 2:
+                        field[element+2][3] -= field[element][4]
+                        if field[element+2][3] <= 0:
+                            field[element+2] = [0, 0, 0, 0, 0]
+                    elif field[element+3][0] == 2:
+                        field[element+3][3] -= field[element][4]
+                        if field[element+3][3] <= 0:
+                            field[element+3] = [0, 0, 0, 0, 0]
+
 
                 # Test if the troop can move
                 elif field[element+1][0] == 0:
@@ -38,11 +56,20 @@ def updateField(field, gameWindow, waitingList):
 
             # Test if the troop is a melee troop
             elif field[element][2] != 0:
+
+                # Test if the troop can attack the camp
+                if element == 24:
+                    print("Camp attack")
+                    ######################
+                    pass
                 
                 # Test if the troop has an enemy to attack in his range
                 if (field[element+1][0] == 2):
                     # Attack the troop in front of him
-                    pass
+                    field[element+1][3] -= field[element][4]
+                    if field[element+1][3] <= 0:
+                        field[element+1] = [0, 0, 0, 0, 0]
+                    
 
                 # Test if the troop can move
                 elif field[element+1][0] == 0:
@@ -55,10 +82,27 @@ def updateField(field, gameWindow, waitingList):
             # Test if the troop is a ranged troop
             if field[element][2] == 2:
 
+                # Test if the troop can attack the camp
+                if element == 2:
+                    print("Camp attack")
+                    ######################
+                    pass
+
                 # Test if the troop has an enemy to attack in his range
                 if (field[element-1][0] == 1) or (field[element-2][0] == 1) or (field[element-3][0] == 1):
                     # Attack the troop in front of him
-                    pass
+                    if field[element-1][0] == 1:
+                        field[element-1][3] -= field[element][4]
+                        if field[element-1][3] <= 0:
+                            field[element-1] = [0, 0, 0, 0, 0]
+                    elif field[element-2][0] == 1:
+                        field[element-2][3] -= field[element][4]
+                        if field[element-2][3] <= 0:
+                            field[element-2] = [0, 0, 0, 0, 0]
+                    elif field[element-3][0] == 1:
+                        field[element-3][3] -= field[element][4]
+                        if field[element-3][3] <= 0:
+                            field[element-3] = [0, 0, 0, 0, 0]
 
                 # Test if the troop can move
                 elif field[element-1][0] == 0:
@@ -67,11 +111,20 @@ def updateField(field, gameWindow, waitingList):
 
             # Test if the troop is a melee troop
             elif field[element][2] != 0:
+
+                # Test if the troop can attack the camp
+                if element == 0:
+                    print("Camp attack")
+                    ######################
+                    pass
                 
                 # Test if the troop has an enemy to attack in his range
                 if (field[element-1][0] == 1):
+
                     # Attack the troop in front of him
-                    pass
+                    field[element-1][3] -= field[element][4]
+                    if field[element-1][3] <= 0:
+                        field[element-1] = [0, 0, 0, 0, 0]
 
                 # Test if the troop can move
                 elif field[element-1][0] == 0:
@@ -84,63 +137,16 @@ newField = {}
 for i in range(25):
     newField[i] = [0, 0, 0, 0, 0]
 
-newField[0] = [1, 1, 1, 100, 10]
-newField[1] = [1, 2, 2, 100, 10]
+newField[0] = [1, 2, 2, 100, 10]
+newField[1] = [1, 1, 1, 100, 10]
 newField[24] = [2, 1, 1, 400, 10]
 newField[23] = [2, 2, 1, 400, 10]
 print("-------------------------------------------------")
 for element in newField:
     print(newField[element])
 field1 = updateField(newField, None, None)
-print("-------------------------------------------------")
-for element in field1:
-    print(field1[element])
-field2 = updateField(field1, None, None)
-print("-------------------------------------------------")
-for element in field2:
-    print(field2[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-field = updateField(field2, None, None)
-print("-------------------------------------------------")
-for element in field:
-    print(field[element])
-
+for i in range(100):
+    print("-------------------------------------------------")
+    for element in field1:
+        print(field1[element])
+    field1 = updateField(field1, None, None)
