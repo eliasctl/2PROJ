@@ -6,13 +6,15 @@ from game.menu import menu
 # from game.menu import menu
 def main():
     # #Displaying the menu
-    idPlayer = menu()
+    menu()
+    idPlayer = "1"
+    idGame = gameBegin(idPlayer)
 
     # #Asking for player name 
     # idPlayer = createPlayer()
     # gameBegin(idPlayer)
     gameWindow = init()
-    game(gameWindow)
+    game(gameWindow, idGame, idPlayer)
     
 
 if __name__ == "__main__":

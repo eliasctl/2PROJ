@@ -8,8 +8,7 @@ def gameBegin(idPlayer):
         data = "?player=" + idPlayer
         response = requests.post(url+data)  # Make a POST request with JSON data
         # Handle the response as needed
-        print(response.json())  # Assuming the response is in JSON format
-        print(response)
+        return response.json()["id"]  # Assuming the response is in JSON format
     except Exception as e:
         print(f"An error occurred: {e}")
         # Handle the exception as needed
