@@ -1,6 +1,7 @@
 import pygame
 from .getData import getData
 from .updateData import updateData
+from .updateField import updateField
 
 
 def game(gameWindow, idGame, idPlayer):
@@ -15,9 +16,13 @@ def game(gameWindow, idGame, idPlayer):
     running = True
     while running:
         game = getData()
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+        # Update the game field
+        updateField(game["field"], gameWindow, None) #, game["waitingList"])
         # print(game)
         # game["game"] = game.pop("id")
         # game.pop("player1Id")
@@ -27,7 +32,7 @@ def game(gameWindow, idGame, idPlayer):
         # print(game)
         # print("-----------------")
         # updateData(game)
-        running = False
+        # running = False
 
     # Quit the game
     pygame.quit()
