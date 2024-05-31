@@ -18,15 +18,15 @@ def game(gameWindow, idGame, idPlayer):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        print(game)
-        game["game"] = game.pop("id")
-        game.pop("player1Id")
-        game.pop("player2Id")
-        game["player1HPCamp"] = 2500
-        print("-----------------")
-        print(game)
-        print("-----------------")
-        updateData(game)
+        # print(game)
+        # game["game"] = game.pop("id")
+        # game.pop("player1Id")
+        # game.pop("player2Id")
+        # game["player1HPCamp"] = 2500
+        # print("-----------------")
+        # print(game)
+        # print("-----------------")
+        # updateData(game)
         running = False
 
     # Quit the game
