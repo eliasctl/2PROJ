@@ -1,5 +1,6 @@
 import pygame
 from googletrans import Translator
+import webbrowser
 
 
 import pygame.mixer
@@ -161,6 +162,7 @@ def menu():
         def handle_click(self, pos):
             if self.is_clicked(pos):
                 self.expanded = not self.expanded
+                print("Selected option:", self.selected_option)
             elif self.expanded:
                 for i, option in enumerate(self.options):
                     option_rect = pygame.Rect(self.rect.x, self.rect.y + (i + 1) * self.rect.height, self.rect.width, self.rect.height)
@@ -311,11 +313,15 @@ def menu():
                         language_dropdown.handle_click(pygame.mouse.get_pos())
                         selected_language = language_dropdown.selected_option
                     if help_button.is_clicked(pygame.mouse.get_pos()):
-                        print("I'm Johnny on the spot")
+
+                    
+                        # Open email client with pre-filled message
+                        email_url = "mailto:clovis.kouoi@supinfo.com?subject=Help Request&body=" 
+                        webbrowser.open(email_url)
 
 
         # Effacer l'écran
-        window.fill(BLACK)
+        window.fill(BLACK) 
 
         # Dessiner la boîte de texte pour les instructions
         if instruction_screen:
