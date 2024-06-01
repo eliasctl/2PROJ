@@ -1,6 +1,7 @@
 from googletrans import Translator
 import pygame
 
+
 pygame.init()
 
 # Define the screen dimensions
@@ -39,25 +40,24 @@ for i, language in enumerate(additional_languages):
 
 translator = Translator()
 
-def translate_menu(menu, dest_language):
+def translate_menu(menu_content, dest_language):
     translated_menu = []
     try:
-        # Translate each item in the menu to the destination language
-        for item in menu:
-            translation = translator.translate(item, dest=dest_language).text
+        # Translate each line in the menu to the destination language
+        for line in menu_content.splitlines():
+            translation = translator.translate(line, dest=dest_language).text
             translated_menu.append(translation)
     except Exception as e:
         print(f"Error translating menu: {e}")
     return translated_menu
 
-menu = ["Hello, how are you?", "What would you like to order?", "Please wait for your food."]
-# Default destination language code for each button
-additional_languages_codes = ["en", "es", "fr", "de", "it", "pt"]
 
 # Main game loop
 running = True
 while running:
     for event in pygame.event.get():
+        additional_languages_codes = ["en", "es", "fr", "de", "it", "pt"]
+
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -68,12 +68,18 @@ while running:
                     # Find the index of the selected button and get the corresponding language code
                     button_index = buttons.index((button, language))
                     dest_language_code = additional_languages_codes[button_index]
-                    # Translate the menu items to the selected language
-                    translated_menu = translate_menu(menu, dest_language_code)
-                    # Print the translated menu items
+                    # Define the menu content here
+                    menu_content = ""  # Replace this with the actual menu content
+                    # Translate the menu to the selected language
+                    translated_menu = translate_menu(menu_content, dest_language_code)
+                    # Print the translated menu on the screen
                     for i, translated_text in enumerate(translated_menu):
-                        print(f"Menu item {i+1}: {translated_text}")
+                        print(f"Translated menu item {i+1}: {translated_text}")
+                else:
+                    running = False
 
     pygame.display.flip()
+
+    
 
 pygame.quit()
