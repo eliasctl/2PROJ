@@ -1,5 +1,7 @@
-import pygame
-import json
+# Use of the function updateField
+# This function is used to update the game field
+# It update the troops position, the troops HP, the troops attack and the camp HP
+
 
 # Type of game field :
 # dictionary with 25 keys (0 to 24) and each key has a list of 2 elements
@@ -147,20 +149,20 @@ def updateField(field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, pl
     return (field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp)
 
 
-newField = {}
-for i in range(25):
-    newField[i] = [0, 0, 0, 0, 0]
+# newField = {}
+# for i in range(25):
+#     newField[i] = [0, 0, 0, 0, 0]
 
-newField[0] = [1, 2, 2, 100, 10]
-newField[1] = [1, 1, 1, 100, 10]
-newField[24] = [2, 1, 1, 400, 10]
-newField[23] = [2, 2, 1, 400, 10]
-print("-------------------------------------------------")
-for element in newField:
-    print(newField[element])
-field1 = updateField(newField, None, None)
-for i in range(100):
-    print("-------------------------------------------------")
-    for element in field1:
-        print(field1[element])
-    field1 = updateField(field1, None, None)
+# newField[0] = [1, 2, 2, 100, 10]
+# newField[1] = [1, 1, 1, 100, 10]
+# newField[24] = [2, 1, 1, 400, 10]
+# newField[23] = [2, 2, 1, 400, 10]
+# print("-------------------------------------------------")
+# for element in newField:
+#     print(newField[element])
+# field1 = updateField(newField, None, None)
+# for i in range(100):
+#     print("-------------------------------------------------")
+#     for element in field1:
+#         print(field1[element])
+#     field1 = updateField(field1, None, None)

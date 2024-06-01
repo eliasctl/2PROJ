@@ -20,19 +20,23 @@ def game(gameWindow, idGame, idPlayer):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
+        print(game)
         # Update the game field
         # game["field"], test, test2, game["player1HPCamp"], game["player2HPCamp"] = updateField(game["field"], None, None, game["player1HPCamp"], game["player2HPCamp"]) #, game["waitingListPlayer1"], game["waitingListPlayer2"]
         # print(game)
         # game["game"] = game.pop("id")
-        # game.pop("player1Id")
-        # game.pop("player2Id")
-        # game["player1HPCamp"] = 2500
-        # print("-----------------")
-        # print(game)
-        # print("-----------------")
-        # updateData(game)
-        # running = False
+        game.pop("player1Id")
+        game.pop("player2Id")
+        game["player1HPCamp"] = 2500
+        print("-----------------")
+        print(game)
+        print("-----------------")
+        updateData(game)
+        running = False
 
     # Quit the game
     pygame.quit()
+
+    # Delete the game
+
+    # Delete the player
