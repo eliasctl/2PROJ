@@ -29,6 +29,21 @@ def menu():
     # Définition de la police
     font = pygame.font.Font(None, 28)
 
+    # Initialize the translator
+    translator = Translator()
+
+    # Function to translate text to the chosen language
+    def translate_text(text, dest_language):
+        try:
+            translation = translator.translate(text, dest=dest_language)
+            return translation.text
+        except ValueError:
+            print(f"Error: {dest_language} is not a valid destination language.")
+            return text
+        except Exception as e:
+            print(f"Error translating text: {e}")
+            return text
+
     # Classe pour les boutons
     class Button:
         def __init__(self, x, y, width, height, text):
@@ -59,7 +74,7 @@ def menu():
                 pygame.draw.line(window, BLACK, (self.rect.x + 5, self.rect.centery), (self.rect.centerx, self.rect.bottom - 5), 2)
                 pygame.draw.line(window, BLACK, (self.rect.centerx, self.rect.bottom - 5), (self.rect.right - 5, self.rect.y + 5), 2)
 
-            text_surface = font.render(self.text, True, BLACK)
+            text_surface = font.render(translate_text(self.text, current_language), True, BLACK)  # Translate text
             text_rect = text_surface.get_rect(topleft=(self.rect.right + 10, self.rect.y))
             window.blit(text_surface, text_rect)
 
@@ -115,7 +130,7 @@ def menu():
                 cursor_rect = pygame.Rect(cursor_x - 5, self.rect.y - 5, 10, self.rect.height + 10)
                 pygame.draw.rect(window, BLACK, cursor_rect)
 
-            text_surface = font.render(f"{self.text}: {self.value}", True, BLACK)
+            text_surface = font.render(f"{translate_text(self.text, current_language)}: {self.value}", True, BLACK)  # Translate text
             text_rect = text_surface.get_rect(topleft=(self.rect.right + 10, self.rect.y))
             window.blit(text_surface, text_rect)
 
@@ -131,10 +146,11 @@ def menu():
             # Return the current value of the slider
             return self.value
 
-    
-
     # Liste de langues pour le menu déroulant
-    language_options = ["English", "Français", "Español", "Deutsch", "Italiano", "Português"]
+    # List of language options for the dropdown menu
+    language_options = ["en", "fr", "es", "de", "it", "pt"]
+    current_language = "en"  # Default language
+
 
     # Création des boutons
     start_button = Button(300, 300, 200, 50, "Start")
@@ -146,6 +162,8 @@ def menu():
     easy_button = Button(300, 200, 200, 50, "Easy")
     hard_button = Button(300, 300, 200, 50, "Hard")
     impossible_button = Button(300, 400, 200, 50, "Impossible")
+    help_button = Button(200, 200, 200, 30, "Send a message")
+    translation_button = Button(200, 250, 200, 30, "Translate")
 
     # Création d'une boîte de texte pour les instructions avec des paragraphes
     instructions_text_box = TextBox(50, 50, 700, 400, """
@@ -180,25 +198,10 @@ def menu():
     music_text_box = TextBox(10, 100, 50, 30, "MUSIC")
     help_text_box = TextBox(10, 210, 50, 30, "HELP")
     language_text_box = TextBox(10, 260, 50, 30, "LANGUAGE")
-    # Chargement de la musique
-    pygame.mixer.music.load("Music/Killer.mp3")
-
-    # Lecture en boucle de la musique
-    pygame.mixer.music.play(-1)
-
-    # Variables de volume initial
-    music_volume = 0.5
-    sfx_volume = 0.5
 
     # Création du curseur (slider) dans les paramètres
     slider = Slider(200, 150, 200, 20, 0, 100, 50, "SFX")
     slider2 = Slider(200, 100, 200, 20, 0, 100, 50, "Music")
-
-    # Création du bouton Help
-    help_button = Button(200, 200, 200, 30, "Send a message")
-
-    #création d'un bouton translation
-    translation_button = Button(200, 250, 200, 30, "Translate")
 
     # Boucle de jeu
     running = True
@@ -207,6 +210,8 @@ def menu():
     instruction_screen = False
     settings_screen = False
     level_screen = False
+
+    current_language = "English"  # Default language
 
     while running:
         # Gestion des événements
@@ -224,7 +229,6 @@ def menu():
                         mode_screen = False
                         level_screen = True
                     elif instruction_button.is_clicked(pygame.mouse.get_pos()):
-
                         menu_screen = False
                         instruction_screen = True
                     elif settings_button.is_clicked(pygame.mouse.get_pos()):
@@ -276,18 +280,29 @@ def menu():
                         # Open email client with pre-filled message
                         email_url = "mailto:clovis.kouoi@supinfo.com;paul.mareschi@supinfo.com;adlane.benouhalima@supinfo.com;elias.moussa-osman@supinfo.com?subject=Help Request&body=" 
                         webbrowser.open(email_url)
-                    if translation_button.is_clicked(pygame.mouse.get_pos()):
-                        subprocess.run(["python", "game/Translation.py"])
+                    elif translation_button.is_clicked(pygame.mouse.get_pos()):
+                        dest_language_code = language_options[1]  # Default to French
+                        # Translate the interface elements to the selected language
+                        translated_start_button = translate_text("Start", dest_language_code)
+                        translated_settings_button = translate_text("Settings", dest_language_code)
+                        translated_instruction_button = translate_text("Instructions", dest_language_code)
+                        # Update the button texts with translations
+                        start_button.text = translated_start_button
+                        settings_button.text = translated_settings_button
+                        instruction_button.text = translated_instruction_button
+                        current_language = dest_language_code  # Update current language
 
+                        # To get the index of the current language
+                    current_language_index = language_options.index(current_language)
 
         # Effacer l'écran
         window.fill(BLACK) 
 
-        # Dessiner la boîte de texte pour les instructions
+        # Dessiner les éléments de l'interface utilisateur en fonction de l'écran actuel et de la langue sélectionnée
         if instruction_screen:
             instructions_text_box.draw()
+            
 
-        # Dessiner les cases à cocher, le texte, le curseur dans les paramètres
         if settings_screen:
             checkbox1.draw()
             checkbox2.draw()
@@ -299,11 +314,9 @@ def menu():
             language_text_box.draw()
             slider.draw()
             slider2.draw()
-            help_button.draw()  # Dessiner le bouton "Test"
+            help_button.draw() 
             help_text_box.draw()
             translation_button.draw()
-
-        # Dessiner les boutons
 
         if menu_screen:
             start_button.draw()
@@ -321,12 +334,11 @@ def menu():
         elif instruction_screen or settings_screen:
             back_button.draw()
 
-
         # Mettre à jour l'affichage
         pygame.display.flip()
 
     # Quitter le jeu
     pygame.quit()
 
-# Call the menu function to start the menu
+# Appeler la fonction menu pour démarrer le menu
 menu()
