@@ -1,3 +1,4 @@
+import time
 import pygame
 from googletrans import Translator
 import webbrowser
@@ -30,6 +31,7 @@ def menu():
                 return text
         except Exception as e:
             print(f"Error translating text: {e}")
+            time.sleep(1)
             return text
 
     class Button:
