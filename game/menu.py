@@ -297,6 +297,6 @@ def menu():
 
         pygame.display.flip()
 
-    pygame.quit()
+    pygame.quit()# quit game
 
 menu()
