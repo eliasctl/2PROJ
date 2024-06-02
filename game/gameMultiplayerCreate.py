@@ -2,8 +2,6 @@ import datetime
 import pygame
 import ast
 from time import sleep
-
-from game.init import init
 from .getData import getData
 from .updateData import updateData
 from .updateField import updateField

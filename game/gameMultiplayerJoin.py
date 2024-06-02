@@ -2,11 +2,8 @@ import datetime
 import pygame
 import ast
 from time import sleep
-
-from game.init import init
 from .getData import getData
 from .updateData import updateData
-from .updateField import updateField
 from .lose import create_defeat_screen
 from .win import create_victory_screen
 from .getTroops import getTroops
@@ -19,17 +16,12 @@ from .joinGame import joinGame
 
 
 def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlayer):
-    
-    joinGame(idPlayer, idGame)
+
+    startTime = datetime.datetime.now()
+
+    joinGame(idPlayer, idGame, startTime)
 
     game = getData(idGame)
-
-    startTime = game["startTime"]
-
-    # Remove leading zeros from datetime string
-    startTime = startTime.lstrip('0')
-
-    startTime = datetime.datetime.strptime(startTime, '%Y-%m-%d %H:%M:%S.%f')
 
     # Wait until startTime + 20 seconds
     while datetime.now() < startTime + datetime.timedelta(seconds=20):
