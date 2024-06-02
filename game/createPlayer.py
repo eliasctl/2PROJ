@@ -2,8 +2,8 @@ import requests
 
 
 # Logical function to create the game with the API
-def createPlayer():
-    url = "http://eliascastel.ddns.net:3001/player?name=olivia"
+def createPlayer(name):
+    url = "http://eliascastel.ddns.net:3001/player?name=" + name
     try:
         response = requests.post(url)  # Make a POST request with JSON data
         # Handle the response as needed
@@ -13,5 +13,3 @@ def createPlayer():
     except Exception as e:
         print(f"An error occurred: {e}")
         # Handle the exception as needed
-
-createPlayer()
