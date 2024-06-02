@@ -65,6 +65,41 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
         game.pop("player1Id")
         game.pop("player2Id")
         game, player = updateField(game, player, player2)
+
+        troopSize = min(screen_width, screen_height) // 19.5
+
+        # #Drawing the field
+        for i in range(0, 25):
+            if game["field"][i][0] == 1:
+                rectanglePlayer1 = pygame.Rect(screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize)
+                pygame.draw.rect(gameWindow, (156, 255, 199), rectanglePlayer1)
+                image = pygame.image.load('./game/tempImages/troops/'+troops[game["field"][i][1]]["image"])
+                image_rect = pygame.transform.scale(image, (troopSize, troopSize))
+                gameWindow.blit(image_rect, rectanglePlayer1)
+
+            elif game["field"][i][0] == 2:
+                rectanglePlayer2 = pygame.Rect(screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize)
+                pygame.draw.rect(gameWindow, (173, 158, 255), rectanglePlayer2)
+                image = pygame.image.load('./game/tempImages/troops/'+troops[game["field"][i][1]]["image"])
+                image_rect = pygame.transform.scale(image, (troopSize, troopSize))
+                image_rect = pygame.transform.flip(image_rect, True, False)
+                gameWindow.blit(image_rect, rectanglePlayer2)
+            else:
+                pygame.draw.rect(gameWindow, (255, 255, 255, 0), (screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize))
+
+        # Drawing infos xp and gold
+        infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
+        pygame.draw.rect(gameWindow, (128, 128, 128), infosEmplacement)
+        font = pygame.font.Font(None, 48)
+        expText = font.render("XP: " + str(player.xp), True, (255, 255, 255))
+        expText_rect = expText.get_rect(center=(infosEmplacement.width // 2, infosEmplacement.height // 4))
+        gameWindow.blit(expText, expText_rect)
+        goldText = font.render("GOLD: " + str(player.gold), True, (255, 255, 255))
+        goldText_rect = goldText.get_rect(center=(infosEmplacement.width // 2, infosEmplacement.height // 4 * 3))
+        gameWindow.blit(goldText, goldText_rect)
+
+        pygame.display.flip()
+        
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
