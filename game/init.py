@@ -39,6 +39,7 @@ def init():
     backgroundImage = pygame.transform.scale(backgroundImage, (width, height))
     gameWindow.blit(backgroundImage, (0, 0))
     # Adlane
+    #create a queue 
 
 
 
