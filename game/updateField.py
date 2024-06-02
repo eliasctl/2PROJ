@@ -30,8 +30,11 @@ import ast
 # }
 
 
-def updateField(game, player):
-    field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp = game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"]
+def updateField(game, player, player2):
+    field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp, player2Gold, plaer2XP = game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"], game["player2Gold"], game["player2XP"]
+    
+    player2.gold = player2Gold
+    player2.xp = plaer2XP
     
     if type(field) == str:
         field = ast.literal_eval(field)
@@ -119,17 +122,17 @@ def updateField(game, player):
                     if field[element-1][0] == 1:
                         field[element-1][3] -= field[element][4]
                         if field[element-1][3] <= 0:
-                            player.earn_xp_and_gold(field[element-1][1])
+                            player2.earn_xp_and_gold(field[element-1][1])
                             field[element-1] = [0, 0, 0, 0, 0]
                     elif field[element-2][0] == 1:
                         field[element-2][3] -= field[element][4]
                         if field[element-2][3] <= 0:
-                            player.earn_xp_and_gold(field[element-2][1])
+                            player2.earn_xp_and_gold(field[element-2][1])
                             field[element-2] = [0, 0, 0, 0, 0]
                     elif field[element-3][0] == 1:
                         field[element-3][3] -= field[element][4]
                         if field[element-3][3] <= 0:
-                            player.earn_xp_and_gold(field[element-3][1])
+                            player2.earn_xp_and_gold(field[element-3][1])
                             field[element-3] = [0, 0, 0, 0, 0]
 
                 # Test if the troop can move
@@ -151,7 +154,7 @@ def updateField(game, player):
                     # Attack the troop in front of him
                     field[element-1][3] -= field[element][4]
                     if field[element-1][3] <= 0:
-                        player.earn_xp_and_gold(field[element-1][1])
+                        player2.earn_xp_and_gold(field[element-1][1])
                         field[element-1] = [0, 0, 0, 0, 0]
 
                 # Test if the troop can move
@@ -176,7 +179,7 @@ def updateField(game, player):
         print(field[element])
     print("\n\n\n")
 
-    game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"] = field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp
+    game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"], game["player2Gold"], game["player2XP"] = field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp, player2.gold, player2.xp
     
 
     return game, player

@@ -2,7 +2,8 @@ from game.createPlayer import createPlayer
 from game.gameBegin import gameBegin
 from game.init import init
 from game.gameSingleplayer import gameSingleplayer
-from game.gameMultiplayer import gameMultiplayer
+from game.gameMultiplayerCreate import gameMultiplayerCreate
+from game.gameMultiplayerJoin import gameMultiplayerJoin
 from game.menu import menu
 def main():
     difficulty = menu()
@@ -32,12 +33,12 @@ def main():
             idGame = gameBegin(idPlayer)
             gameWindow, screen_width, screen_height = init()
             # Create the game with the API but waiting for the second player
-            gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, join=False)
+            gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPlayer)
         case _ if isinstance(difficulty, int):  # Add this line to test if difficulty is an integer
             print("Joining multiplayer game")
             idPlayer = createPlayer()
             gameWindow, screen_width, screen_height = init()
-            gameMultiplayer(gameWindow, screen_width, screen_height, difficulty, idPlayer, join=True)
+            gameMultiplayerJoin(gameWindow, screen_width, screen_height, difficulty, idPlayer)
         case _:
             print("Invalid difficulty")
     
