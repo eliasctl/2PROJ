@@ -31,7 +31,7 @@ frame_images = pyglet.image.ImageGrid(pyglet.image.load("pixelart\Troop\caveman 
 """frame_images = pyglet.image.ImageGrid(pyglet.image.load("pixelart\Troop\Robots gifs\Robot 2\WalkRobot2.gif"), 1, 6) """
 """frame_images = pyglet.image.ImageGrid(pyglet.image.load("pixelart\Troop\Robots gifs\Robot 2\AttackRobot2.gif"), 1, 11)""" 
 """frame_images = pyglet.image.ImageGrid(pyglet.image.load("pixelart\Troop\Robots gifs\Robot 3\WalkRobot3.gif"), 1, 8)"""
-"""frame_images = pyglet.image.ImageGrid(pyglet.image.load("pixelart\Troop\Robots gifs\Robot 3\AttackRobot3.gif"), 1, 4)"""
+frame_images = pyglet.image.ImageGrid(pyglet.image.load("pixelart\Troop\Robots gifs\Robot 3\AttackRobot3.gif"), 1, 4)
 
 
 
