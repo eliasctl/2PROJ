@@ -38,10 +38,6 @@ def init():
     backgroundImage = pygame.image.load("game/tempImages/Samurai.png")
     backgroundImage = pygame.transform.scale(backgroundImage, (width, height))
     gameWindow.blit(backgroundImage, (0, 0))
-    # Adlane
-    #create a queue 
-
-
 
     # Infos emplacement on the top left
     infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
@@ -199,9 +195,5 @@ def init():
     Sa_text_rect = Sa.get_rect(center=SaRect.center)
     gameWindow.blit(Sa, Sa_text_rect)
     pygame.draw.rect(gameWindow, (255, 255, 255), SaRect, 2)
-
-
-    # Screen refresh
-    pygame.display.flip()
 
     return gameWindow, screen_width, screen_height

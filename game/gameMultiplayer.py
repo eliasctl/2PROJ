@@ -1,7 +1,8 @@
 import pygame
 import ast
-import json
 from time import sleep
+
+from game.init import init
 from .getData import getData
 from .updateData import updateData
 from .updateField import updateField
@@ -13,9 +14,25 @@ from .economy import Player
 from .getSpecialCapacity import getSpecialCapacity
 from .deleteGame import deleteGame
 from .deletePlayer import deletePlayer
+from .joinGame import joinGame
 
 
-def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer):
+def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, join):
+
+    if join:
+        joinGame(idPlayer, idGame)
+    
+    # Wait for the second player
+    if join == False:
+        game = getData(idGame)
+        while game["player2Id"] == None:
+            print("Waiting for the second player")
+            sleep(1)
+            game = getData(idGame)
+            
+    gameWindow, screen_width, screen_height = init()
+
+
     # Initialize pygame
     pygame.init()
     pygame.display.set_caption("Game")

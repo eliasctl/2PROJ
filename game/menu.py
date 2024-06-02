@@ -129,6 +129,28 @@ def menu():
 
         def get_value(self):
             return self.value
+        
+    
+    class Input:
+        def __init__(self, x, y, width, height, text):
+            self.rect = pygame.Rect(x, y, width, height)
+            self.text = text
+
+        def draw(self):
+            pygame.draw.rect(window, WHITE, self.rect)
+            text_surface = font.render(self.text, True, BLACK)
+            text_rect = text_surface.get_rect(center=self.rect.center)
+            window.blit(text_surface, text_rect)
+
+        def is_clicked(self, pos):
+            # When the input box is clicked, the text should be editable
+            return self.rect.collidepoint(pos) and self.text == ""
+        
+        def update_text(self, new_text):
+            self.text = new_text
+
+        def get_text(self):
+            return self.text
 
     language_options = ["en", "fr", "es", "de", "it", "pt"]
     current_language = "en"
@@ -146,6 +168,9 @@ def menu():
     impossible_button = Button(300, 400, 200, 50, "Impossible")
     help_button = Button(200, 200, 200, 30, "Send a message")
     translation_button = Button(200, 250, 200, 30, "Translate")
+    create_game_button = Button(300, 300, 200, 50, "Create Game")
+    join_game_button = Button(300, 400, 200, 50, "Join Game")
+    join_confirm_button = Button(300, 370, 200, 50, "Confirm")
 
     instructions_text_box = TextBox(50, 50, 700, 400, """
     Age of War is an epic strategy game where you defend your base
@@ -177,9 +202,13 @@ def menu():
     music_text_box = TextBox(10, 100, 50, 30, "MUSIC")
     help_text_box = TextBox(10, 210, 50, 30, "HELP")
     language_text_box = TextBox(10, 260, 50, 30, "LANGUAGE")
+    join_text_box = TextBox(10, 300, 50, 30, "JOIN GAME")
 
     slider = Slider(200, 150, 200, 20, 0, 100, 50, "SFX")
     slider2 = Slider(200, 100, 200, 20, 0, 100, 50, "Music")
+
+    # Input box for joining a game
+    join_input_box = Input(300, 300, 200, 50, "Enter game code")
 
     running = True
     menu_screen = True
@@ -187,6 +216,8 @@ def menu():
     instruction_screen = False
     settings_screen = False
     level_screen = False
+    multiplayer = False
+    join_screen = False
 
     current_language = "en"
 
@@ -224,12 +255,31 @@ def menu():
                         mode_screen = False
                         level_screen = True
                     elif multiplayer_button.is_clicked(pygame.mouse.get_pos()):
-                        print("Multiplayer button clicked")
-                        pygame.quit()
-                        return "multiplayer"
+                        menu_screen = False
+                        mode_screen = False
+                        multiplayer = True
                     elif return_button.is_clicked(pygame.mouse.get_pos()):
                         menu_screen = True
                         mode_screen = False
+                elif multiplayer:
+                    if return_button.is_clicked(pygame.mouse.get_pos()):
+                        menu_screen = True
+                        multiplayer = False
+                    elif create_game_button.is_clicked(pygame.mouse.get_pos()):
+                        print("Create game button clicked")
+                        pygame.quit()
+                        return "multiplayer"
+                    elif join_game_button.is_clicked(pygame.mouse.get_pos()):
+                        print("Join game button clicked")
+                        multiplayer = False
+                        join_screen = True
+                elif join_screen:
+                    if join_confirm_button.is_clicked(pygame.mouse.get_pos()):
+                        # Take the input from the text box and join the game
+                        print("Join confirm button clicked")
+                        idGameJoin = int(input("Enter the game code: "))
+                        pygame.quit()
+                        return idGameJoin
                 elif level_screen:
                     if easy_button.is_clicked(pygame.mouse.get_pos()):
                         print("Easy button clicked")
@@ -311,6 +361,15 @@ def menu():
             impossible_button.draw()
             return_button.draw()
         elif instruction_screen or settings_screen:
+            return_button.draw()
+        elif multiplayer:
+            create_game_button.draw()
+            join_game_button.draw()
+            return_button.draw()
+        elif join_screen:
+            join_text_box.draw()
+            join_input_box.draw()
+            join_confirm_button.draw()
             return_button.draw()
 
         pygame.display.flip()
