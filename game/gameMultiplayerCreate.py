@@ -86,6 +86,16 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
                 gameWindow.blit(image_rect, rectanglePlayer2)
             else:
                 pygame.draw.rect(gameWindow, (255, 255, 255, 0), (screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize))
+        
+        font = pygame.font.Font(None, 48)
+        # Changing the amount of HP of each base
+        leftLifeText = font.render(str(game["player1HPCamp"]), True, (255, 255, 255))
+        leftLifeTextRect = leftLifeText.get_rect(center=(screen_width // 7.2,screen_height // 1.3))
+        gameWindow.blit(leftLifeText, leftLifeTextRect)
+
+        rightLifeText = font.render(str(game["player2HPCamp"]), True, (255, 255, 255))
+        rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - screen_width // 7.2, screen_height // 1.3))
+        gameWindow.blit(rightLifeText, rightLifeTextRect)
 
         # Drawing infos xp and gold
         infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
@@ -98,8 +108,8 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
         goldText_rect = goldText.get_rect(center=(infosEmplacement.width // 2, infosEmplacement.height // 4 * 3))
         gameWindow.blit(goldText, goldText_rect)
 
+
         pygame.display.flip()
-        
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
