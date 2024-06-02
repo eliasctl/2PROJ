@@ -31,11 +31,13 @@ import ast
 
 
 def updateField(game, player, player2):
-    field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp, player2Gold, plaer2XP = game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"], game["player2Gold"], game["player2XP"]
-    
-    player2.gold = player2Gold
-    player2.xp = plaer2XP
-    
+    field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp, player2Gold, player2XP = game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"], game["player2Gold"], game["player2XP"]
+
+    if player2Gold == None:
+        player2Gold = 0
+    if player2XP == None:
+        player2XP = 0
+
     if type(field) == str:
         field = ast.literal_eval(field)
     if type(waitingListPlayer1) == str:
@@ -46,6 +48,10 @@ def updateField(game, player, player2):
         player1HPCamp = ast.literal_eval(player1HPCamp)
     if type(player2HPCamp) == str:
         player2HPCamp = ast.literal_eval(player2HPCamp)
+    if type(player2Gold) == str:
+        player2Gold = ast.literal_eval(player2Gold)
+    if type(player2XP) == str:
+        player2XP = ast.literal_eval(player2XP)
     
     # Loop throught the field for player 1
     for element in reversed(field):
@@ -181,7 +187,8 @@ def updateField(game, player, player2):
 
     game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"], game["player2Gold"], game["player2XP"] = field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp, player2.gold, player2.xp
     
-
+    print("---------------------Game----------------------------")
+    print(game["field"])
     return game, player
 
 

@@ -26,9 +26,12 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
 
     startTime = game["startTime"]
 
-    startTime = ast.literal_eval(startTime)
+    # Remove leading zeros from datetime string
+    startTime = startTime.lstrip('0')
 
-    # Wait until now + 20 seconds
+    startTime = datetime.datetime.strptime(startTime, '%Y-%m-%d %H:%M:%S.%f')
+
+    # Wait until startTime + 20 seconds
     while datetime.now() < startTime + datetime.timedelta(seconds=20):
         print("Waiting for the game to start")
         print(datetime.now())
