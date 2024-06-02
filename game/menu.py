@@ -2,6 +2,7 @@ import time
 import pygame
 from googletrans import Translator
 import webbrowser
+import pygame.mixer
 
 def menu():
     pygame.init()
@@ -21,6 +22,11 @@ def menu():
     WHITE = (255, 255, 255)
     font = pygame.font.Font(None, 28)
     translator = Translator()
+
+    # Load background music
+    pygame.mixer.music.load("Music\Killer.mp3")
+    pygame.mixer.music.play(-1)  # -1 loops the music indefinitely
+    pygame.mixer.music.set_volume(0.5)  # Adjust volume level (0.0 to 1.0)
 
     def translate_text(text, dest_language):
         try:
@@ -376,4 +382,4 @@ def menu():
 
     pygame.quit()# quit game
 
-# menu()
+menu()
