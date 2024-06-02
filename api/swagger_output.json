@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "description": ""
   },
-  "host": "eliascatel.ddns.net:3001",
+  "host": "localhost:3001",
   "basePath": "/",
   "schemes": [
     "http"
@@ -37,16 +37,9 @@
         "description": "",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "player": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "player",
+            "in": "query",
+            "type": "string"
           }
         ],
         "responses": {
@@ -94,19 +87,14 @@
         "description": "",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "player": {
-                  "example": "any"
-                },
-                "id": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "player",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
           }
         ],
         "responses": {
@@ -123,65 +111,88 @@
       }
     },
     "/game/data": {
-      "post": {
+      "put": {
         "description": "",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "player1Civilization": {
-                  "example": "any"
-                },
-                "player2Civilization": {
-                  "example": "any"
-                },
-                "player1HPCamp": {
-                  "example": "any"
-                },
-                "player2HPCamp": {
-                  "example": "any"
-                },
-                "field": {
-                  "example": "any"
-                },
-                "player1SpecialCapacity": {
-                  "example": "any"
-                },
-                "player2SpecialCapacity": {
-                  "example": "any"
-                },
-                "player1Turrets1": {
-                  "example": "any"
-                },
-                "player1Turrets2": {
-                  "example": "any"
-                },
-                "player1Turrets3": {
-                  "example": "any"
-                },
-                "player2Turrets1": {
-                  "example": "any"
-                },
-                "player2Turrets2": {
-                  "example": "any"
-                },
-                "player2Turrets3": {
-                  "example": "any"
-                },
-                "waitingListPlayer1": {
-                  "example": "any"
-                },
-                "waitingListPlayer2": {
-                  "example": "any"
-                },
-                "id": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "player1Civilization",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Civilization",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1HPCamp",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2HPCamp",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "field",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1SpecialCapacity",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2SpecialCapacity",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1Turrets1",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1Turrets2",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1Turrets3",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Turrets1",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Turrets2",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Turrets3",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "waitingListPlayer1",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "waitingListPlayer2",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
           }
         ],
         "responses": {
@@ -325,16 +336,9 @@
         "description": "",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "name",
+            "in": "query",
+            "type": "string"
           }
         ],
         "responses": {

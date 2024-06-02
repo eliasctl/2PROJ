@@ -3,10 +3,9 @@ import requests
 
 # Logical function to create the game with the API
 def createPlayer():
-    url = "http://eliascastel.ddns.net:3001/player/"
+    url = "http://eliascastel.ddns.net:3001/player?name=olivia"
     try:
-        datatest = {"name": "Omaiwa"}
-        response = requests.post(url, json=datatest)  # Make a POST request with JSON data
+        response = requests.post(url)  # Make a POST request with JSON data
         # Handle the response as needed
         print(response.json())  # Assuming the response is in JSON format
         print(response)

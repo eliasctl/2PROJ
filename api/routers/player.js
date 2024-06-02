@@ -20,12 +20,13 @@ player.get('/', async (req, res) => {
 player.post('/', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        const [result] = await connection.execute('INSERT INTO player (name) VALUES (?)', [req.body.name]);
+        const [result] = await connection.execute('INSERT INTO player (name) VALUES (?)', [req.query.name]);
 
         res.status(201).json({ id: result.insertId });
 
         await connection.end();
     } catch (error) {
+        //res.status(400).json({ error: 'Bad request' });
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

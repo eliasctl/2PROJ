@@ -37,15 +37,17 @@ game.get('/get/:id', async (req, res) => {
 game.post('/', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        const [rows] = await connection.execute('SELECT * FROM player WHERE id = ?', [req.body.player]);
+        const [rows] = await connection.execute('SELECT * FROM player WHERE id = ?', [req.query.player]);
         if (rows.length > 0) {
-            const [game] = await connection.execute('INSERT INTO game (player1Id, player1Civilization, player2Civilization, player1HPCamp, player2HPCamp) VALUES (?, 1, 1, 5000, 5000)', [req.body.player]); // req.query.player
+            const [game] = await connection.execute('INSERT INTO game (player1Id, player1Civilization, player2Civilization, player1HPCamp, player2HPCamp) VALUES (?, 1, 1, 5000, 5000)', [req.query.player]); // req.query.player
             res.status(201).json({ id: game.insertId });
         }
         else {
             res.status(404).json({ error: 'User not found' });
         }
     } catch (error) {
+        console.log(error);
+        console.log(req);
         res.status(400).json({ error: 'Bad request' });
     }
 });
@@ -53,12 +55,12 @@ game.post('/', async (req, res) => {
 game.put('/joinGame', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        const [rows] = await connection.execute('SELECT * FROM player WHERE id = ?', [req.body.player]);
+        const [rows] = await connection.execute('SELECT * FROM player WHERE id = ?', [req.query.player]);
         if (rows.length > 0) {
-            const [game] = await connection.execute('SELECT * FROM game WHERE player2Id IS NULL AND id = ?', [req.body.id]);
+            const [game] = await connection.execute('SELECT * FROM game WHERE player2Id IS NULL AND id = ?', [req.query.id]);
             if (game.length > 0) {
-                await connection.execute('UPDATE game SET player2Id = ? WHERE id = ?', [req.body.player, req.body.id]);
-                res.status(200).json({ id: req.body.id });
+                await connection.execute('UPDATE game SET player2Id = ? WHERE id = ?', [req.query.player, req.query.id]);
+                res.status(200).json({ id: req.query.id });
             }
             else {
                 res.status(404).json({ error: 'Game not found or already full or ended' });
@@ -72,10 +74,10 @@ game.put('/joinGame', async (req, res) => {
     }
 });
 
-game.post('/data', async (req, res) => {
+game.put('/data', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
-        await connection.execute('UPDATE game SET player1Civilization = ?, player2Civilization = ?, player1HPCamp = ?, player2HPCamp = ?, field = ?, player1SpecialCapacity = ?, player2SpecialCapacity = ?, player1Turrets1 = ?, player1Turrets2 = ?, player1Turrets3 = ?, player2Turrets1 = ?, player2Turrets2 = ?, player2Turrets3 = ?, waitingListPlayer1 = ?, waitingListPlayer2 = ? WHERE id = ?', [req.body.player1Civilization, req.body.player2Civilization, req.body.player1HPCamp, req.body.player2HPCamp, req.body.field, req.body.player1SpecialCapacity, req.body.player2SpecialCapacity, req.body.player1Turrets1, req.body.player1Turrets2, req.body.player1Turrets3, req.body.player2Turrets1, req.body.player2Turrets2, req.body.player2Turrets3, req.body.waitingListPlayer1, req.body.waitingListPlayer2, req.body.id]);
+        await connection.execute('UPDATE game SET player1Civilization = ?, player2Civilization = ?, player1HPCamp = ?, player2HPCamp = ?, field = ?, player1SpecialCapacity = ?, player2SpecialCapacity = ?, player1Turrets1 = ?, player1Turrets2 = ?, player1Turrets3 = ?, player2Turrets1 = ?, player2Turrets2 = ?, player2Turrets3 = ?, waitingListPlayer1 = ?, waitingListPlayer2 = ? WHERE id = ?', [req.query.player1Civilization, req.query.player2Civilization, req.query.player1HPCamp, req.query.player2HPCamp, req.query.field, req.query.player1SpecialCapacity, req.query.player2SpecialCapacity, req.query.player1Turrets1, req.query.player1Turrets2, req.query.player1Turrets3, req.query.player2Turrets1, req.query.player2Turrets2, req.query.player2Turrets3, req.query.waitingListPlayer1, req.query.waitingListPlayer2, req.query.id]);
         res.status(200).json({ message: 'Data updated' });
     } catch (error) {
         res.status(400).json({ error: 'Bad request' });
