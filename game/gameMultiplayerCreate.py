@@ -28,9 +28,9 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
 
     startTime = ast.literal_eval(startTime)
 
-    while datetime.now() < startTime + datetime.timedelta(seconds=20):
+    while datetime.datetime.now() < startTime + datetime.timedelta(seconds=20):
         print("Waiting for the game to start")
-        print(datetime.now())
+        print(datetime.datetime.now())
         pass
 
     # Initialize pygame

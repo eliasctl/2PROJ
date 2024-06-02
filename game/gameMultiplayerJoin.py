@@ -24,9 +24,9 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
     game = getData(idGame)
 
     # Wait until startTime + 20 seconds
-    while datetime.now() < startTime + datetime.timedelta(seconds=20):
+    while datetime.datetime.now() < startTime + datetime.timedelta(seconds=20):
         print("Waiting for the game to start")
-        print(datetime.now())
+        print(datetime.datetime.now())
         pass
 
     # Initialize pygame
