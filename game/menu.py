@@ -170,7 +170,7 @@ def menu():
     translation_button = Button(200, 250, 200, 30, "Translate")
     create_game_button = Button(300, 300, 200, 50, "Create Game")
     join_game_button = Button(300, 400, 200, 50, "Join Game")
-    join_confirm_button = Button(300, 370, 200, 50, "Confirm")
+    join_confirm_button = Button(300, 400, 200, 50, "Confirm")
 
     instructions_text_box = TextBox(50, 50, 700, 400, """
     Age of War is an epic strategy game where you defend your base

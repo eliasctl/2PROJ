@@ -1,8 +1,7 @@
+import datetime
 import pygame
 import ast
 from time import sleep
-
-from game.init import init
 from .getData import getData
 from .updateData import updateData
 from .updateField import updateField
@@ -14,23 +13,23 @@ from .economy import Player
 from .getSpecialCapacity import getSpecialCapacity
 from .deleteGame import deleteGame
 from .deletePlayer import deletePlayer
-from .joinGame import joinGame
 
 
-def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, join):
+def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPlayer):
 
     game = getData(idGame)
-    if join:
-        joinGame(idPlayer, idGame)
-    else:
-        while type(game["player2Id"]) != int:
-            print("Waiting for the second player")
-            game = getData(idGame)
-            sleep(1)
 
-            
-    gameWindow, screen_width, screen_height = init()
+    while type(game["player2Id"]) != int:
+        print("Waiting for the second player")
+        game = getData(idGame)
+        sleep(1)
 
+    startTime = datetime.datetime.strptime(game["startTime"], "%Y-%m-%d %H:%M:%S")
+
+    while datetime.datetime.now() < startTime + datetime.timedelta(seconds=2):
+        print("Waiting for the game to start")
+        print(datetime.datetime.now())
+        pass
 
     # Initialize pygame
     pygame.init()
@@ -41,6 +40,7 @@ def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, j
     civilizations = getCivilizations()
     specialCapacity = getSpecialCapacity()
     player = Player()
+    player2 = Player()
     print(player.gold)
     print(player.xp)
 
@@ -49,7 +49,7 @@ def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, j
     while running:
         game = getData(idGame)
         for element in game:
-            if type(game[element]) == str:
+            if type(game[element]) == str and element != "startTime":
                 game[element] = ast.literal_eval(game[element])
         if game["field"] == None:
             game["field"] = {}
@@ -65,7 +65,7 @@ def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, j
     
         game.pop("player1Id")
         game.pop("player2Id")
-        newGame, player = updateField(game, player)
+        game, player = updateField(game, player, player2)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -139,7 +139,10 @@ def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, j
         print(player.xp)
         print(player.gold)
 
-        updateData(newGame)
+        print("--------------Field-----------------------")
+        print(game["field"])
+
+        updateData(game)
 
         sleep(1)
 
