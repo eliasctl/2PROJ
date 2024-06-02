@@ -50,7 +50,7 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
         player.gold = game["player2Gold"]
         player.xp = game["player2XP"]
         for element in game:
-            if type(game[element]) == str:
+            if type(game[element]) == str and element != "startTime":
                 game[element] = ast.literal_eval(game[element])
         if game["field"] == None:
             game["field"] = {}

@@ -34,7 +34,7 @@ def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, 
         game = getData(idGame)
         print("waiting list player 1 after get data: ", game)
         for element in game:
-            if type(game[element]) == str:
+            if type(game[element]) == str and element != "startTime":
                 game[element] = ast.literal_eval(game[element])
         if game["field"] == None:
             game["field"] = {}

@@ -49,7 +49,7 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
     while running:
         game = getData(idGame)
         for element in game:
-            if type(game[element]) == str:
+            if type(game[element]) == str and element != "startTime":
                 game[element] = ast.literal_eval(game[element])
         if game["field"] == None:
             game["field"] = {}
