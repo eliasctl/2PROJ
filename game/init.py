@@ -2,7 +2,7 @@ import pygame
 import requests
 import array
 from PIL import Image
-
+import pyglet 
 def init():
     # Set the URL
     url = 'http://eliascastel.ddns.net:3001'
@@ -94,6 +94,8 @@ def init():
     rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - rightLifeBar.width // 2, rightLifeBar.centery + 25))
     gameWindow.blit(rightLifeText, rightLifeTextRect)
 
+    skeleton_warrior_img = pyglet.image.load_animation("pixelart/Troop/caveman gifs/skeletonwarriorwalk.gif")
+    sprite = pyglet.sprite.Sprite(skeleton_warrior_img)
     # Troop 1
     troopSize = min(screen_width, screen_height) // 20
     troopRect = pygame.Rect(screen_width // 3.85 - troopSize // 2, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)
@@ -103,6 +105,12 @@ def init():
     troop1_rect = troop1.get_rect(center=troopRect.center)
     gameWindow.blit(troop1, troop1_rect)
     pygame.draw.rect(gameWindow, (255, 255, 255), troopRect, 2)
+
+    # Display the sprite
+    sprite.x = troopRect.x
+    sprite.y = troopRect.y
+    sprite.draw()
+    
 
     # Troop 2
     troop2Rect = pygame.Rect(screen_width // 3.15 - troopSize, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)

@@ -8,4 +8,4 @@ test/
 
 # Exclure tous les fichiers _pycache_
 **/__pycache__
-game/queuetest.py
+
