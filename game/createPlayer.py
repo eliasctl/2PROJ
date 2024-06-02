@@ -8,9 +8,9 @@ def createPlayer():
     url = "http://eliascastel.ddns.net:3001/player?name=player" + str(intRandom)
     try:
         response = requests.post(url)  # Make a POST request with JSON data
-        # Handle the response as needed
-        print(response.json())  # Assuming the response is in JSON format
-        print(response)
+
+        # print(response.json())
+        # print(response)
         return response.json()["id"]
     except Exception as e:
         print(f"An error occurred: {e}")

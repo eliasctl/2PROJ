@@ -15,7 +15,7 @@ from .deleteGame import deleteGame
 from .deletePlayer import deletePlayer
 
 
-def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
+def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer):
     # Initialize pygame
     pygame.init()
     pygame.display.set_caption("Game")

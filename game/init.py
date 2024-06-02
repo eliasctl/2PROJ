@@ -205,4 +205,3 @@ def init():
     pygame.display.flip()
 
     return gameWindow, screen_width, screen_height
-    

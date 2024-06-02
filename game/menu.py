@@ -223,18 +223,30 @@ def menu():
                         menu_screen = False
                         mode_screen = False
                         level_screen = True
+                    elif multiplayer_button.is_clicked(pygame.mouse.get_pos()):
+                        print("Multiplayer button clicked")
+                        pygame.quit()
+                        return "multiplayer"
                     elif return_button.is_clicked(pygame.mouse.get_pos()):
                         menu_screen = True
                         mode_screen = False
                 elif level_screen:
                     if easy_button.is_clicked(pygame.mouse.get_pos()):
                         print("Easy button clicked")
+                        pygame.quit()
+                        return "easy"
                     elif medium_button.is_clicked(pygame.mouse.get_pos()):
                         print("Medium button clicked")
+                        pygame.quit()
+                        return "medium"
                     elif difficult_button.is_clicked(pygame.mouse.get_pos()):
                         print("Difficult button clicked")
+                        pygame.quit()
+                        return "difficult"
                     elif impossible_button.is_clicked(pygame.mouse.get_pos()):
                         print("Impossible button clicked")
+                        pygame.quit()
+                        return "impossible"
                     elif return_button.is_clicked(pygame.mouse.get_pos()):
                         menu_screen = True
                         level_screen = False
@@ -305,4 +317,4 @@ def menu():
 
     pygame.quit()# quit game
 
-menu()
+# menu()
