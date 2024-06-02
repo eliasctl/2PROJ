@@ -25,14 +25,15 @@ def menu():
     def translate_text(text, dest_language):
         try:
             translation = translator.translate(text, dest=dest_language)
-            if translation and translation.text:
+            if translation is not None and translation.text is not None:  # Check if translation is successful
                 return translation.text
             else:
-                return text
+                return text  # Return the original text if translation is unsuccessful
         except Exception as e:
             print(f"Error translating text: {e}")
             time.sleep(1)
             return text
+
 
     class Button:
         def __init__(self, x, y, width, height, text):
@@ -131,6 +132,7 @@ def menu():
 
     language_options = ["en", "fr", "es", "de", "it", "pt"]
     current_language = "en"
+    desired_language_index = 0 
 
     start_button = Button(300, 300, 200, 50, "Start")
     settings_button = Button(300, 400, 200, 50, "Settings")
@@ -255,9 +257,11 @@ def menu():
                         email_url = "mailto:clovis.kouoi@supinfo.com;paul.mareschi@supinfo.com;adlane.benouhalima@supinfo.com;elias.moussa-osman@supinfo.com?subject=Help Request&body="
                         webbrowser.open(email_url)
                     elif translation_button.is_clicked(pygame.mouse.get_pos()):
-                        dest_language_code = language_options[1]  # Example: Switch to the second language in the list
+                        desired_language_index = (desired_language_index + 1) % len(language_options)
+                        dest_language_code = language_options[desired_language_index]
                         update_button_texts(dest_language_code)
                         current_language = dest_language_code
+                        
 
         window.fill(BLACK)
         window.blit(background_image, (0, 0))
