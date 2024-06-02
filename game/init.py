@@ -1,3 +1,4 @@
+import sys
 import pygame
 import requests
 import array
@@ -43,6 +44,8 @@ def init(backgroundImage, baseImage):
     backgroundImage = pygame.transform.scale(backgroundImage, (width, height))
     gameWindow.blit(backgroundImage, (0, 0))
 
+    pygame.mixer.music.load("Music\With Gun & Crucifix - Epic Rock Orchestral Music.mp3")
+    pygame.mixer.music.play(-1)  # -1 loops the music indefinitely
     # Infos emplacement on the top left
     infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
     pygame.draw.rect(gameWindow, colorGrey, infosEmplacement)
@@ -64,7 +67,7 @@ def init(backgroundImage, baseImage):
     settingRect = settingImage.get_rect()
     settingRect.topright = (screen_width - 20 , 20)
     gameWindow.blit(settingImage, settingRect)
-
+               
     # Base image on the left and right
     leftBaseRect = baseImage.get_rect()
     leftBaseRect.topleft = (0, screen_height // 1.3 - leftBaseRect.height // 2)
@@ -96,10 +99,8 @@ def init(backgroundImage, baseImage):
     gameWindow.blit(troop1, troop1_rect)
     pygame.draw.rect(gameWindow, (0,0,0), troopRect, 2)
 
-    # Display the sprite
-    sprite.x = troopRect.x
-    sprite.y = troopRect.y
-    sprite.draw()
+
+
     
 
     # Troop 2

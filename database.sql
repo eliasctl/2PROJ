@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : dim. 02 juin 2024 à 13:48
+-- Généré le : dim. 02 juin 2024 à 21:46
 -- Version du serveur : 8.0.36-0ubuntu0.23.10.1
 -- Version de PHP : 8.2.10-2ubuntu2.1
 
@@ -24,32 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `background`
---
-
-CREATE TABLE `background` (
-  `id` int NOT NULL,
-  `civilization` int NOT NULL,
-  `image` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `camps`
---
-
-CREATE TABLE `camps` (
-  `id` int NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `xpCost` int NOT NULL,
-  `passiveGold` int NOT NULL,
-  `image` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `civilization`
 --
 
@@ -58,7 +32,7 @@ CREATE TABLE `civilization` (
   `name` varchar(255) NOT NULL,
   `xpCost` int NOT NULL,
   `passiveGold` int NOT NULL,
-  `image` int NOT NULL
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -66,22 +40,10 @@ CREATE TABLE `civilization` (
 --
 
 INSERT INTO `civilization` (`id`, `name`, `xpCost`, `passiveGold`, `image`) VALUES
-(1, 'Primitive Age', 0, 0, 0),
-(2, 'Medieval Age', 0, 0, 0),
-(3, 'Modern Age', 0, 0, 0),
-(4, 'Future Age', 0, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `economy`
---
-
-CREATE TABLE `economy` (
-  `id` int NOT NULL,
-  `gold` int NOT NULL,
-  `xp` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+(1, 'Primitive Age', 2000, 0, 'Primitive_Age.png'),
+(2, 'Medieval Age', 5000, 0, 'Medieval_Age.png'),
+(3, 'Modern Age', 10000, 0, 'Modern_Age.png'),
+(4, 'Future Age', 15000, 0, 'Future_Age.png');
 
 -- --------------------------------------------------------
 
@@ -107,7 +69,10 @@ CREATE TABLE `game` (
   `player2Turrets2` int DEFAULT NULL,
   `player2Turrets3` int DEFAULT NULL,
   `waitingListPlayer1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `waitingListPlayer2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `waitingListPlayer2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `player2Gold` int DEFAULT NULL,
+  `player2XP` int DEFAULT NULL,
+  `startTime` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -159,7 +124,7 @@ CREATE TABLE `troops` (
   `damage` int NOT NULL,
   `civilization` int NOT NULL COMMENT '0=stoneAge; 1=gallic; 2=modern OR 3=furistic',
   `type` int NOT NULL COMMENT '1=light; 2=range OR 3=heavy',
-  `image` int NOT NULL COMMENT 'Id of image on the image table',
+  `image` varchar(255) NOT NULL,
   `goldDrop` int DEFAULT NULL,
   `cost` int NOT NULL,
   `xpDrop` int DEFAULT NULL,
@@ -171,18 +136,18 @@ CREATE TABLE `troops` (
 --
 
 INSERT INTO `troops` (`id`, `name`, `hp`, `damage`, `civilization`, `type`, `image`, `goldDrop`, `cost`, `xpDrop`, `spawnTime`) VALUES
-(1, 'Clubman', 10, 3, 1, 1, 0, NULL, 20, NULL, 1),
-(2, 'Spear Thrower', 15, 5, 1, 2, 0, NULL, 40, NULL, 2),
-(3, 'Warrior', 20, 8, 1, 3, 0, NULL, 10, NULL, 3),
-(4, 'Knight', 50, 30, 2, 1, 0, NULL, 150, NULL, 1),
-(5, 'Crossbowman', 40, 20, 2, 2, 0, NULL, 100, NULL, 2),
-(6, 'Wizard', 60, 25, 2, 3, 0, NULL, 200, NULL, 3),
-(7, 'Tank', 150, 50, 3, 1, 0, NULL, 400, NULL, 1),
-(8, 'Sniper', 80, 40, 3, 2, 0, NULL, 250, NULL, 2),
-(9, 'Bazooka', 120, 45, 3, 3, 0, NULL, 300, NULL, 3),
-(10, 'Mech', 80, 80, 4, 1, 0, NULL, 800, NULL, 1),
-(11, 'Laser', 100, 70, 4, 2, 0, NULL, 500, NULL, 2),
-(12, 'Cyborg', 180, 90, 4, 3, 0, NULL, 700, NULL, 3);
+(1, 'Clubman', 10, 3, 1, 1, 'Clubman.png', NULL, 20, NULL, 1),
+(2, 'Spear Thrower', 15, 5, 1, 2, 'Spear_Thrower.png', NULL, 40, NULL, 2),
+(3, 'Warrior', 20, 8, 1, 3, 'Warrior.png', NULL, 10, NULL, 3),
+(4, 'Knight', 50, 30, 2, 1, 'Knight.png', NULL, 150, NULL, 1),
+(5, 'Crossbowman', 40, 20, 2, 2, 'Crossbowman.png', NULL, 100, NULL, 2),
+(6, 'Wizard', 60, 25, 2, 3, 'Wizard.png', NULL, 200, NULL, 3),
+(7, 'Tank', 150, 50, 3, 1, 'Tank.png', NULL, 400, NULL, 1),
+(8, 'Sniper', 80, 40, 3, 2, 'Sniper.png', NULL, 250, NULL, 2),
+(9, 'Bazooka', 120, 45, 3, 3, 'Bazooka.png', NULL, 300, NULL, 3),
+(10, 'Mech', 80, 80, 4, 1, 'Mech.png', NULL, 800, NULL, 1),
+(11, 'Laser', 100, 70, 4, 2, 'Laser.png', NULL, 500, NULL, 2),
+(12, 'Cyborg', 180, 90, 4, 3, 'Cyborg.png', NULL, 700, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -195,7 +160,7 @@ CREATE TABLE `turrets` (
   `name` varchar(50) NOT NULL,
   `damage` int NOT NULL,
   `civilization` int NOT NULL,
-  `image` int NOT NULL,
+  `image` varchar(255) NOT NULL,
   `goldCost` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -204,28 +169,22 @@ CREATE TABLE `turrets` (
 --
 
 INSERT INTO `turrets` (`id`, `name`, `damage`, `civilization`, `image`, `goldCost`) VALUES
-(1, 'Tribal Hut', 4, 1, 0, 50),
-(2, 'Cave', 6, 1, 0, 100),
-(3, 'Totem Pole', 10, 1, 0, 150),
-(4, 'Castle', 40, 2, 0, 350),
-(5, 'Cannon Tower', 50, 2, 0, 450),
-(6, 'Wizard Tower', 60, 2, 0, 600),
-(7, 'Bunker', 70, 3, 0, 450),
-(8, 'Missile Silo', 80, 3, 0, 550),
-(9, 'Laser Turret', 90, 3, 0, 650),
-(10, 'Forcefield', 100, 4, 0, 700),
-(11, 'Plasma Cannon', 120, 4, 0, 900),
-(12, 'Death Ray', 150, 4, 0, 1200);
+(1, 'Tribal Hut', 4, 1, 'Tribal_Hut.png', 50),
+(2, 'Cave', 6, 1, 'Cave.png', 100),
+(3, 'Totem Pole', 10, 1, 'Totem_Pole.png', 150),
+(4, 'Castle', 40, 2, 'Castle.png', 350),
+(5, 'Cannon Tower', 50, 2, 'Cannon_Tower.png', 450),
+(6, 'Wizard Tower', 60, 2, 'Wizard_Tower.png', 600),
+(7, 'Bunker', 70, 3, 'Bunker.png', 450),
+(8, 'Missile Silo', 80, 3, 'Missile_Silo.png', 550),
+(9, 'Laser Turret', 90, 3, 'Laser_Turret.png', 650),
+(10, 'Forcefield', 100, 4, 'Forcefield.png', 700),
+(11, 'Plasma Cannon', 120, 4, 'Plasma_Cannon.png', 900),
+(12, 'Death Ray', 150, 4, 'Death_Ray.png', 1200);
 
 --
 -- Index pour les tables déchargées
 --
-
---
--- Index pour la table `background`
---
-ALTER TABLE `background`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `camps`
@@ -274,12 +233,6 @@ ALTER TABLE `turrets`
 --
 
 --
--- AUTO_INCREMENT pour la table `background`
---
-ALTER TABLE `background`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pour la table `camps`
 --
 ALTER TABLE `camps`
@@ -295,13 +248,13 @@ ALTER TABLE `civilization`
 -- AUTO_INCREMENT pour la table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=348;
 
 --
 -- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
 -- AUTO_INCREMENT pour la table `specialCapacity`

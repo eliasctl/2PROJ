@@ -21,17 +21,17 @@ WHITE = (255, 255, 255)
 # Set up credits
 credits = [
     "Endgame Credits",
-    "Directed by Your Name",
-    "Produced by Producer Name",
-    "Written by Writer Name",
-    "Art Direction by Art Director Name",
-    "Music by Composer Name",
-    "Special Thanks to Special Thanks List",
+    "Directed by Paul,Elias,Clovis,Adlane",
+    "Produced by Paul,Elias,Clovis,Adlane",
+    "Written by Paul,Elias,Clovis,Adlane",
+    "Art Direction by Art Paul,Elias,Clovis,Adlane",
+    "Music by Paul,Elias,Clovis,Adlane",
+    "Special Thanks to Paul,Elias,Clovis,Adlane",
     "And all the amazing contributors!",
 ]
 
 # Set up scrolling speed
-scroll_speed = 2
+scroll_speed = 1
 
 # Set up starting and ending y positions
 start_y = SCREEN_HEIGHT + 100  # Starting y position
