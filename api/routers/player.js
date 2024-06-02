@@ -14,6 +14,7 @@ player.get('/', async (req, res) => {
         await connection.end();
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
+        console.log(error);
     }
 });
 
@@ -28,6 +29,16 @@ player.post('/', async (req, res) => {
     } catch (error) {
         //res.status(400).json({ error: 'Bad request' });
         res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+player.delete('/', async (req, res) => {
+    try {
+        const connection = await mysql.createConnection(dbConfig);
+        await connection.execute('DELETE FROM player WHERE id = ?', [req.query.id]);
+        res.status(200).json({ message: 'Player deleted' });
+    } catch (error) {
+        res.status(400).json({ error: 'Bad request' });
     }
 });
 

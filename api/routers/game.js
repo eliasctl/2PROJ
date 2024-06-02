@@ -17,23 +17,6 @@ game.get('/', async (req, res) => {
     }
 });
 
-game.get('/get/:id', async (req, res) => {
-    try {
-        const connection = await mysql.createConnection(dbConfig);
-        const [rows] = await connection.execute('SELECT * FROM game WHERE id = ?', [req.params.id]);
-
-        if (rows.length > 0) {
-            res.status(200).json(rows[0]);
-        } else {
-            res.status(404).json({ error: 'Game not found' });
-        }
-
-        await connection.end();
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
 game.post('/', async (req, res) => {
     try {
         const connection = await mysql.createConnection(dbConfig);
@@ -49,6 +32,33 @@ game.post('/', async (req, res) => {
         console.log(error);
         console.log(req);
         res.status(400).json({ error: 'Bad request' });
+    }
+});
+
+game.delete('/', async (req, res) => {
+    try {
+        const connection = await mysql.createConnection(dbConfig);
+        await connection.execute('DELETE FROM game WHERE id = ?', [req.query.id]);
+        res.status(200).json({ message: 'Game deleted' });
+    } catch (error) {
+        res.status(400).json({ error: 'Bad request' });
+    }
+});
+
+game.get('/get/:id', async (req, res) => {
+    try {
+        const connection = await mysql.createConnection(dbConfig);
+        const [rows] = await connection.execute('SELECT * FROM game WHERE id = ?', [req.params.id]);
+
+        if (rows.length > 0) {
+            res.status(200).json(rows[0]);
+        } else {
+            res.status(404).json({ error: 'Game not found' });
+        }
+
+        await connection.end();
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
