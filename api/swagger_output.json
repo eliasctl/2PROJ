@@ -113,6 +113,11 @@
             "name": "id",
             "in": "query",
             "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "type": "string"
           }
         ],
         "responses": {
@@ -184,6 +189,16 @@
           },
           {
             "name": "waitingListPlayer2",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Gold",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2XP",
             "in": "query",
             "type": "string"
           },
@@ -288,49 +303,12 @@
         }
       }
     },
-    "/image/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/image/background": {
       "get": {
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/image/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -386,6 +364,30 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/player/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

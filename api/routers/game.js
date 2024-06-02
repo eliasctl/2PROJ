@@ -69,7 +69,7 @@ game.put('/joinGame', async (req, res) => {
         if (rows.length > 0) {
             const [game] = await connection.execute('SELECT * FROM game WHERE player2Id IS NULL AND id = ?', [req.query.id]);
             if (game.length > 0) {
-                await connection.execute('UPDATE game SET player2Id = ? WHERE id = ?', [req.query.player, req.query.id]);
+                await connection.execute('UPDATE game SET player2Id = ?, startTime = ? WHERE id = ?', [req.query.player, req.query.startTime, req.query.id]);
                 res.status(200).json({ id: req.query.id });
             }
             else {
@@ -119,9 +119,15 @@ game.put('/data', async (req, res) => {
     if (req.query.waitingListPlayer2 === undefined || req.query.waitingListPlayer2 === null || req.query.waitingListPlayer2 === '' || req.query.waitingListPlayer2 === 'None') {
         req.query.waitingListPlayer2 = null;
     }
+    if (req.query.player2Gold === undefined || req.query.player2Gold === null || req.query.player2Gold === '' || req.query.player2Gold === 'None') {
+        req.query.player2Gold = null;
+    }
+if (req.query.player2XP === undefined || req.query.player2XP === null || req.query.player2XP === '' || req.query.player2XP === 'None') {
+        req.query.player2XP = null;
+    }
     try {
         const connection = await mysql.createConnection(dbConfig);
-        await connection.execute('UPDATE game SET player1Civilization = ?, player2Civilization = ?, player1HPCamp = ?, player2HPCamp = ?, field = ?, player1SpecialCapacity = ?, player2SpecialCapacity = ?, player1Turrets1 = ?, player1Turrets2 = ?, player1Turrets3 = ?, player2Turrets1 = ?, player2Turrets2 = ?, player2Turrets3 = ?, waitingListPlayer1 = ?, waitingListPlayer2 = ? WHERE id = ?', [req.query.player1Civilization, req.query.player2Civilization, req.query.player1HPCamp, req.query.player2HPCamp, req.query.field, req.query.player1SpecialCapacity, req.query.player2SpecialCapacity, req.query.player1Turrets1, req.query.player1Turrets2, req.query.player1Turrets3, req.query.player2Turrets1, req.query.player2Turrets2, req.query.player2Turrets3, req.query.waitingListPlayer1, req.query.waitingListPlayer2, req.query.id]);
+        await connection.execute('UPDATE game SET player1Civilization = ?, player2Civilization = ?, player1HPCamp = ?, player2HPCamp = ?, field = ?, player1SpecialCapacity = ?, player2SpecialCapacity = ?, player1Turrets1 = ?, player1Turrets2 = ?, player1Turrets3 = ?, player2Turrets1 = ?, player2Turrets2 = ?, player2Turrets3 = ?, waitingListPlayer1 = ?, waitingListPlayer2 = ?, player2Gold = ?, player2XP = ? WHERE id = ?', [req.query.player1Civilization, req.query.player2Civilization, req.query.player1HPCamp, req.query.player2HPCamp, req.query.field, req.query.player1SpecialCapacity, req.query.player2SpecialCapacity, req.query.player1Turrets1, req.query.player1Turrets2, req.query.player1Turrets3, req.query.player2Turrets1, req.query.player2Turrets2, req.query.player2Turrets3, req.query.waitingListPlayer1, req.query.waitingListPlayer2, req.query.player2Gold, req.query.player2XP, req.query.id]);
         res.status(200).json({ message: 'Data updated' });
     } catch (error) {
         console.log(error);
