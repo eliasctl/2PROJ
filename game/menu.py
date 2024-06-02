@@ -382,4 +382,4 @@ def menu():
 
     pygame.quit()# quit game
 
-menu()
+# menu()
