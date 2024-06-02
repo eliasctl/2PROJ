@@ -83,7 +83,7 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
                         game["waitingListPlayer2"] = ast.literal_eval(game["waitingListPlayer2"])
                     if len(game["waitingListPlayer2"]) < 5 and player.gold >= troopData["cost"]:
                         player.gold -= troopData["cost"]
-                        game["waitingListPlayer2"].append([1, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
+                        game["waitingListPlayer2"].append([2, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
                     else:
                         print("You can't buy this troop or waiting list is full")
                 elif (mouse_pos[0] > screen_width // 3.15 - buttonSize and mouse_pos[0] < screen_width // 3.15 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
@@ -96,7 +96,7 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
                         game["waitingListPlayer2"] = ast.literal_eval(game["waitingListPlayer2"])
                     if len(game["waitingListPlayer2"]) < 5 and player.gold >= troopData["cost"]:
                         player.gold -= troopData["cost"]
-                        game["waitingListPlayer2"].append([1, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
+                        game["waitingListPlayer2"].append([2, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
                     else :
                         print("You can't buy this troop or waiting list is full")
                 elif (mouse_pos[0] > screen_width // 2.8 - buttonSize and mouse_pos[0] < screen_width // 2.8 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
@@ -109,7 +109,7 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
                         game["waitingListPlayer2"] = ast.literal_eval(game["waitingListPlayer2"])
                     if len(game["waitingListPlayer2"]) < 5 and player.gold >= troopData["cost"]:
                         player.gold -= troopData["cost"]
-                        game["waitingListPlayer2"].append([1, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
+                        game["waitingListPlayer2"].append([2, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
                     else :
                         print("You can't buy this troop or waiting list is full")
                 elif (mouse_pos[0] > screen_width // 1.56 - buttonSize and mouse_pos[0] < screen_width // 1.56 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
