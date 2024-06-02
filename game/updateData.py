@@ -10,14 +10,15 @@ def updateData(data):
             urlData += elements + "=" + data[elements] + "&"
         
         # print(data)
-        print(urlData)
+        # print(urlData)
         # print(url + urlData)
         # Make the API request
-        response = requests.put(url+urlData)
+         
+        requests.put(url+urlData)
 
-        print("Data updated")
-        print(response.text)
-        print(response.status_code)
+        # print("Data updated")
+        # print(response.text)
+        # print(response.status_code)
 
         # Process the response
         

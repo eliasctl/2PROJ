@@ -10,6 +10,9 @@ from .win import create_victory_screen
 from .getTroops import getTroops
 from .getCivilizations import getCivilizations
 from .economie import Player
+from .getSpecialCapacity import getSpecialCapacity
+from .deleteGame import deleteGame
+from .deletePlayer import deletePlayer
 
 
 def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
@@ -20,6 +23,7 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
     pygame.display.flip()
     troops = getTroops()
     civilizations = getCivilizations()
+    specialCapacity = getSpecialCapacity()
     player = Player()
     print(player.gold)
     print(player.xp)
@@ -83,10 +87,6 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
                     # Clicked on troop 3 (heavy weight)
                     idTroop = 3 + (int(game["player1Civilization"] -1) * 3)
                     troopData = troops[idTroop-1]
-                    print("######################################")
-                    print(idTroop)
-                    print(troopData)
-                    print("######################################")
                     if game["waitingListPlayer1"] == None:
                         game["waitingListPlayer1"] = []
                     if type(game["waitingListPlayer1"]) == str:
@@ -98,15 +98,15 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
                         print("You can't buy this troop or waiting list is full")
                 elif (mouse_pos[0] > screen_width // 1.56 - buttonSize and mouse_pos[0] < screen_width // 1.56 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
                     # New era 
-                    if game["player1Civilization"] < 4 and player.xp >= civilizations[game["player1Civilization"]]["cost"]:
-                        player.xp -= civilizations[game["player1Civilization"]]["cost"]
+                    if game["player1Civilization"] < 4 and player.xp >= civilizations[game["player1Civilization"]]["xpCost"]:
+                        player.xp -= civilizations[game["player1Civilization"]]["xpCost"]
                         game["player1Civilization"] += 1
                     else:
                         print("You can't have more than 4 eras or you don't have enough xp")
                 elif (mouse_pos[0] > screen_width // 1.47 - buttonSize and mouse_pos[0] < screen_width // 1.47 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
                     # Special attack
-                    if game["specialAttack"] == False:
-                        game["specialAttack"] = True
+                    if game["player1SpecialCapacity"] == False and player.xp >= specialCapacity[game["player1Civilization"]]["cost"]:
+                        game["player1SpecialCapacity"] = True
                     else:
                         print("You can't use the special attack yet")
         
@@ -115,11 +115,13 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
         print(game["waitingListPlayer1"])
 
         print("--------------XP and Gold-----------------------")
-        print(player.gold)
         print(player.xp)
+        print(player.gold)
 
         print("--------------Passive income-----------------------")
         player.passive_income(game["player1Civilization"])
+        print(player.xp)
+        print(player.gold)
 
         updateData(newGame)
 
@@ -129,5 +131,7 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
     pygame.quit()
 
     # Delete the game
-
+    deleteGame(idGame)
+    
     # Delete the player
+    deletePlayer(idPlayer)
