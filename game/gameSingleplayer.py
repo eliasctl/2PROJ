@@ -8,7 +8,7 @@ from .lose import create_defeat_screen
 from .win import create_victory_screen
 from .getTroops import getTroops
 from .getCivilizations import getCivilizations
-from .economie import Player
+from .economy import Player
 from .getSpecialCapacity import getSpecialCapacity
 from .deleteGame import deleteGame
 from .deletePlayer import deletePlayer
