@@ -14,7 +14,7 @@ from .deleteGame import deleteGame
 from .deletePlayer import deletePlayer
 
 
-def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer):
+def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, difficulty):
     # Initialize pygame
     pygame.init()
     pygame.display.set_caption("Game")
