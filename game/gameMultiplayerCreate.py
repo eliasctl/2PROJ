@@ -90,11 +90,13 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
         font = pygame.font.Font(None, 48)
         # Changing the amount of HP of each base
         leftLifeText = font.render(str(game["player1HPCamp"]), True, (255, 255, 255))
-        leftLifeTextRect = leftLifeText.get_rect(center=(screen_width // 7.2,screen_height // 1.3))
+        leftLifeTextRect = leftLifeText.get_rect(center=(screen_width // 7.2, screen_height // 1.3))
+        pygame.draw.rect(gameWindow, (128, 128, 128), leftLifeTextRect)
         gameWindow.blit(leftLifeText, leftLifeTextRect)
 
         rightLifeText = font.render(str(game["player2HPCamp"]), True, (255, 255, 255))
         rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - screen_width // 7.2, screen_height // 1.3))
+        pygame.draw.rect(gameWindow, (128, 128, 128), rightLifeText)
         gameWindow.blit(rightLifeText, rightLifeTextRect)
 
         # Drawing infos xp and gold
