@@ -56,7 +56,7 @@ def updateField(game):
                     player2HPCamp -= field[element][4]
 
                 # Test if the troop has an enemy to attack in his range
-                if (field[element+1][0] == 2) or (field[element+2][0] == 2) or (field[element+3][0] == 2):
+                elif (field[element+1][0] == 2) or (field[element+2][0] == 2) or (field[element+3][0] == 2):
                     # Attack the troop in front of him
                     if field[element+1][0] == 2:
                         field[element+1][3] -= field[element][4]
@@ -86,7 +86,7 @@ def updateField(game):
                     player2HPCamp -= field[element][4]
                 
                 # Test if the troop has an enemy to attack in his range
-                if (field[element+1][0] == 2):
+                elif (field[element+1][0] == 2):
                     # Attack the troop in front of him
                     field[element+1][3] -= field[element][4]
                     if field[element+1][3] <= 0:
@@ -110,7 +110,7 @@ def updateField(game):
                     player1HPCamp -= field[element][4]
 
                 # Test if the troop has an enemy to attack in his range
-                if (field[element-1][0] == 1) or (field[element-2][0] == 1) or (field[element-3][0] == 1):
+                elif (field[element-1][0] == 1) or (field[element-2][0] == 1) or (field[element-3][0] == 1):
                     # Attack the troop in front of him
                     if field[element-1][0] == 1:
                         field[element-1][3] -= field[element][4]
@@ -139,7 +139,7 @@ def updateField(game):
                     player1HPCamp -= field[element][4]
                 
                 # Test if the troop has an enemy to attack in his range
-                if (field[element - 1][0] == 1):
+                elif (field[element - 1][0] == 1):
 
                     # Attack the troop in front of him
                     field[element-1][3] -= field[element][4]
@@ -151,10 +151,10 @@ def updateField(game):
                     field[element-1] = field[element]
                     field[element] = [0, 0, 0, 0, 0]
 
-    if waitingListPlayer1 != None and field[0] == [0, 0, 0, 0, 0]:
+    if waitingListPlayer1 != None and field[0] == [0, 0, 0, 0, 0] and waitingListPlayer1 != []:
         field[0] = waitingListPlayer1[0]
         waitingListPlayer1.pop(0)
-    if waitingListPlayer2 != None and field[24] == [0, 0, 0, 0, 0]:
+    if waitingListPlayer2 != None and field[24] == [0, 0, 0, 0, 0] and waitingListPlayer2 != []:
         field[24] = waitingListPlayer2[0]
         waitingListPlayer2.pop(0)
 

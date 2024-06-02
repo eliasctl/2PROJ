@@ -109,7 +109,7 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
         print(newGame)
 
         print("--------------Updating Game-----------------------")
-        newGame["field"] = json.dumps(newGame["field"])
+        # newGame["field"] = 
         updateData(newGame)
         # # print(game)
         # game["player1HPCamp"] = 2500
