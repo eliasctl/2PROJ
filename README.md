@@ -1,8 +1,3 @@
-### To do
-
-Dans le init : faire les bouttons de compétences et de troupes
-
-
 # AGE OF WAR
 
 Ce projet a été réalisé dans le cadre d'un projet de fin d'année à SUPINFO sur la programmation d'un jeu vidéo du type Age Of War. 
@@ -19,7 +14,7 @@ Demander à un des dévellopeur de vous le présenter
 
 Dans le terminale, inscrviez les commandes suivantes :
 
-    - pip install pygame
+    - pip install (les dépendances voir dans la doc utilisateur / installation)
     - pip install
     - cd api
     - npm i
