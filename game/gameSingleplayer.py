@@ -18,7 +18,6 @@ def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, 
     # Initialize pygame
     pygame.init()
     pygame.display.set_caption("Game")
-    pygame.draw.rect(gameWindow, (255, 0, 0), (0, 0, 50, 50))
     pygame.display.flip()
     troops = getTroops()
     civilizations = getCivilizations()
@@ -51,6 +50,28 @@ def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, 
         game.pop("player1Id")
         game.pop("player2Id")
         newGame, player = updateField(game, player, player2)
+
+        troopSize = min(screen_width, screen_height) // 19.5
+
+        # #Drrawing the field
+        for i in range(0, 25):
+            if game["field"][i][0] == 1:
+                rectanglePlayer1 = pygame.Rect(screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize)
+                pygame.draw.rect(gameWindow, (0,255,0), rectanglePlayer1, 10)
+                image = pygame.image.load('./game/tempImages/'+troops[game["field"][i][1]]["image"])
+                image_rect = pygame.transform.scale(image, (troopSize, troopSize))
+                gameWindow.blit(image_rect, rectanglePlayer1)
+            elif game["field"][i][0] == 2:
+                rectanglePlayer2 = pygame.Rect(screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize)
+                pygame.draw.rect(gameWindow, (0,0,255), rectanglePlayer2, 10)
+                image = pygame.image.load('./game/tempImages/'+troops[game["field"][i][1]]["image"])
+                image_rect = pygame.transform.scale(image, (troopSize, troopSize))
+                image_rect = pygame.transform.flip(image_rect, True, False)
+                gameWindow.blit(image_rect, rectanglePlayer2)
+            else:
+                pygame.draw.rect(gameWindow, (255,255,255), (screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize))
+
+        pygame.display.flip()
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

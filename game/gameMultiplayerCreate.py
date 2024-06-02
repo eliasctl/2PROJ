@@ -34,7 +34,6 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
     # Initialize pygame
     pygame.init()
     pygame.display.set_caption("Game")
-    pygame.draw.rect(gameWindow, (255, 0, 0), (0, 0, 50, 50))
     pygame.display.flip()
     troops = getTroops()
     civilizations = getCivilizations()

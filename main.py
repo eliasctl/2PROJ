@@ -43,4 +43,8 @@ def main():
             print("Invalid difficulty")
     
 if __name__ == "__main__":
-    main()
+    idPlayer = createPlayer()
+    idGame = gameBegin(idPlayer)
+    gameWindow, screen_width, screen_height = init()
+    gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, difficulty=0.7)
+    # main()
