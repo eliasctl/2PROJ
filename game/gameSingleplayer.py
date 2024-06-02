@@ -1,8 +1,9 @@
+from PIL import Image
 import pygame
 import ast
 from time import sleep
-
 import pyglet
+from game.init import init
 from .getData import getData
 from .updateData import updateData
 from .updateField import updateField
@@ -73,6 +74,16 @@ def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, 
                 gameWindow.blit(image_rect, rectanglePlayer2)
             else:
                 pygame.draw.rect(gameWindow, (255, 255, 255, 0), (screen_width // 7.2 + troopSize*i, screen_height // 1.17, troopSize, troopSize))
+        
+        font = pygame.font.Font(None, 48)
+        # Changing the amount of HP of each base
+        leftLifeText = font.render(str(game["player1HPCamp"]), True, (255, 255, 255))
+        leftLifeTextRect = leftLifeText.get_rect(center=(screen_width // 7.2,screen_height // 1.3))
+        gameWindow.blit(leftLifeText, leftLifeTextRect)
+
+        rightLifeText = font.render(str(game["player2HPCamp"]), True, (255, 255, 255))
+        rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - screen_width // 7.2, screen_height // 1.3))
+        gameWindow.blit(rightLifeText, rightLifeTextRect)
 
         # Drawing infos xp and gold
         infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
@@ -84,6 +95,7 @@ def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, 
         goldText = font.render("GOLD: " + str(player.gold), True, (255, 255, 255))
         goldText_rect = goldText.get_rect(center=(infosEmplacement.width // 2, infosEmplacement.height // 4 * 3))
         gameWindow.blit(goldText, goldText_rect)
+
 
         pygame.display.flip()
         
@@ -144,6 +156,22 @@ def gameSingleplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, 
                         player.xp -= civilizations[newGame["player1Civilization"]]["xpCost"]
                         newGame["player1Civilization"] += 1
                         newGame["player2Civilization"] += 1
+                        if game["player1Civilization"] == 1:
+                            backgroundImage = pygame.image.load("game/tempImages/Caveman.jpg")
+                            baseImage = pygame.image.load("game/tempImages/base.png")
+                            gameWindow, screen_width, screen_height = init(backgroundImage, baseImage)
+                        elif game["player1Civilization"] == 2:
+                            backgroundImage = pygame.image.load("game/tempImages/Samurai.png")
+                            # baseImage = pygame.image.load("game/tempImages/samuraihut.png")
+                            gameWindow, screen_width, screen_height = init(backgroundImage, baseImage)
+                        elif game["player1Civilization"] == 3:
+                            backgroundImage = pygame.image.load("game/tempImages/Modern.png")
+                            # baseImage = pygame.image.load("game/tempImages/modern hut.png")
+                            gameWindow, screen_width, screen_height = init(backgroundImage, baseImage)
+                        elif game["player1Civilization"] == 4:
+                            backgroundImage = pygame.image.load("game/tempImages/futur.jpg")
+                            # baseImage = pygame.image.load("game/tempImages/future hut.png")
+                            gameWindow, screen_width, screen_height = init(backgroundImage, baseImage)
                     else:
                         print("You can't have more than 4 eras or you don't have enough xp")
                 elif (mouse_pos[0] > screen_width // 1.47 - buttonSize and mouse_pos[0] < screen_width // 1.47 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):

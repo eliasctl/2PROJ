@@ -4,8 +4,12 @@ import requests
 import array
 from PIL import Image
 import pyglet 
+def init(backgroundImage, baseImage):
+    if backgroundImage == None:
+        backgroundImage = pygame.image.load("game/tempImages/Caveman.jpg")
+    if baseImage == None:
+         baseImage = pygame.image.load("game/tempImages/base.png")
 
-def init():
     # Set the URL
     url = 'http://eliascastel.ddns.net:3001'
 
@@ -37,10 +41,11 @@ def init():
     colorGrey = (128, 128, 128)
     # colorBackground = (50, 137, 250)
     # Load the background image
-    backgroundImage = pygame.image.load("game/tempImages/Samurai.png")
     backgroundImage = pygame.transform.scale(backgroundImage, (width, height))
     gameWindow.blit(backgroundImage, (0, 0))
 
+    pygame.mixer.music.load("Music\With Gun & Crucifix - Epic Rock Orchestral Music.mp3")
+    pygame.mixer.music.play(-1)  # -1 loops the music indefinitely
     # Infos emplacement on the top left
     infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
     pygame.draw.rect(gameWindow, colorGrey, infosEmplacement)
@@ -64,7 +69,6 @@ def init():
     gameWindow.blit(settingImage, settingRect)
                
     # Base image on the left and right
-    baseImage = pygame.image.load("game/tempImages/base.png")
     leftBaseRect = baseImage.get_rect()
     leftBaseRect.topleft = (0, screen_height // 1.3 - leftBaseRect.height // 2)
     gameWindow.blit(baseImage, leftBaseRect)
@@ -83,16 +87,8 @@ def init():
     pygame.draw.rect(gameWindow, (255, 0, 0), rightLifeBar)
     pygame.draw.rect(gameWindow, (0, 255, 0), rightLifeBar.inflate(-5, -5))
 
-    # Life bar text
-    leftLifeText = font.render("XXXhp", True, (255, 255, 255))
-    leftLifeTextRect = leftLifeText.get_rect(center=(leftLifeBar.width // 2, leftLifeBar.centery + 25))
-    gameWindow.blit(leftLifeText, leftLifeTextRect)
-
-    rightLifeText = font.render("XXXhp", True, (255, 255, 255))
-    rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - rightLifeBar.width // 2, rightLifeBar.centery + 25))
-    gameWindow.blit(rightLifeText, rightLifeTextRect)
-
-
+    skeleton_warrior_img = pyglet.image.load_animation("pixelart/Troop/caveman gifs/skeletonwarriorwalk.gif")
+    sprite = pyglet.sprite.Sprite(skeleton_warrior_img)
     # Troop 1
     troopSize = min(screen_width, screen_height) // 20
     troopRect = pygame.Rect(screen_width // 3.85 - troopSize // 2, screen_height * 4 // 4.1 - troopSize // 2, troopSize, troopSize)
