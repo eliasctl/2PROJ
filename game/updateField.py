@@ -1,3 +1,4 @@
+import ast
 # Use of the function updateField
 # This function is used to update the game field
 # It update the troops position, the troops HP, the troops attack and the camp HP
@@ -20,11 +21,28 @@
 # my_dict_json = json.dumps(my_dict)
 
 
-def updateField(field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp):
-    if field == None:
-        field = {}
-        for i in range(25):
-            field[i] = [0, 0, 0, 0, 0]
+# Example of game field
+# my_dict = {
+#     0: [1, 1, 1, 100, 10],
+#     1: [1, 2, 2, 100, 10],
+#     ...
+#     24: [2, 1, 1, 400, 10]
+# }
+
+
+def updateField(game):
+    field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp = game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"]
+    
+    if type(field) == str:
+        field = ast.literal_eval(field)
+    if type(waitingListPlayer1) == str:
+        waitingListPlayer1 = ast.literal_eval(waitingListPlayer1)
+    if type(waitingListPlayer2) == str:
+        waitingListPlayer2 = ast.literal_eval(waitingListPlayer2)
+    if type(player1HPCamp) == str:
+        player1HPCamp = ast.literal_eval(player1HPCamp)
+    if type(player2HPCamp) == str:
+        player2HPCamp = ast.literal_eval(player2HPCamp)
     
     # Loop throught the field for player 1
     for element in reversed(field):
@@ -144,9 +162,16 @@ def updateField(field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, pl
         print("Player 2 wins")
     elif player2HPCamp <= 0:
         print("Player 1 wins")
+
+    print("---------------------Field----------------------------")
+    for element in field:
+        print(field[element])
+    print("\n\n\n")
+
+    game["field"], game["waitingListPlayer1"], game["waitingListPlayer2"], game["player1HPCamp"], game["player2HPCamp"] = field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp
     
 
-    return (field, waitingListPlayer1, waitingListPlayer2, player1HPCamp, player2HPCamp)
+    return game
 
 
 # newField = {}

@@ -196,5 +196,5 @@ def init():
     # Screen refresh
     pygame.display.flip()
 
-    return gameWindow
+    return gameWindow, screen_width, screen_height
     

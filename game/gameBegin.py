@@ -12,5 +12,3 @@ def gameBegin(idPlayer):
         print(f"An error occurred: {e}")
         print(response)
         # Handle the exception as needed
-
-gameBegin("1")

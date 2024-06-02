@@ -1,12 +1,12 @@
 import requests
 
-def getData(idGame):
+def getCivilizations():
     # Define the URL
     url = "http://eliascastel.ddns.net:3001"
 
     try:
         # Make the API request
-        response = requests.get(url+'/game/get/'+str(idGame))
+        response = requests.get(url+'/game/civilization')
 
         # Process the response
         data = response.json()

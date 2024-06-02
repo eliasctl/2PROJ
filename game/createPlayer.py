@@ -9,7 +9,7 @@ def createPlayer(name):
         # Handle the response as needed
         print(response.json())  # Assuming the response is in JSON format
         print(response)
-        return response.json()
+        return response.json()#["id"]
     except Exception as e:
         print(f"An error occurred: {e}")
         # Handle the exception as needed

@@ -6,11 +6,11 @@ from game.game import game
 def main():
     # #Displaying the menu
     # Before the menu the player can select a name, if its empty : we choose player + the last id used and increment it
-    # menu()
+    # idPlayer = menu()
     idPlayer = "1"
     idGame = gameBegin(idPlayer)
-    gameWindow = init()
-    game(gameWindow, idGame, idPlayer)
+    gameWindow, screen_width, screen_height = init()
+    game(gameWindow, screen_width, screen_height, idGame, idPlayer)
     
 
 if __name__ == "__main__":

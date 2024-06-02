@@ -61,4 +61,4 @@ def create_defeat_screen():
     pygame.quit()
 
 # Call the function to create the defeat screen
-create_defeat_screen()
+# create_defeat_screen()
