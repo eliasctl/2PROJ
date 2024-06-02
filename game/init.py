@@ -4,6 +4,7 @@ import requests
 import array
 from PIL import Image
 import pyglet 
+import pygame.mixer
 
 def init():
     # Set the URL
@@ -41,6 +42,8 @@ def init():
     backgroundImage = pygame.transform.scale(backgroundImage, (width, height))
     gameWindow.blit(backgroundImage, (0, 0))
 
+    pygame.mixer.music.load("Music\With Gun & Crucifix - Epic Rock Orchestral Music.mp3")
+    pygame.mixer.music.play(-1)  # -1 loops the music indefinitely
     # Infos emplacement on the top left
     infosEmplacement = pygame.Rect(0, 0, screen_width // 5, screen_height // 10)
     pygame.draw.rect(gameWindow, colorGrey, infosEmplacement)
