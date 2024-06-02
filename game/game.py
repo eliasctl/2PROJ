@@ -9,6 +9,7 @@ from .lose import create_defeat_screen
 from .win import create_victory_screen
 from .getTroops import getTroops
 from .getCivilizations import getCivilizations
+from .economie import Player
 
 
 def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
@@ -19,9 +20,9 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
     pygame.display.flip()
     troops = getTroops()
     civilizations = getCivilizations()
-    xp = 0
-    gold = 1000
-    
+    player = Player()
+    print(player.gold)
+    print(player.xp)
 
     # Game loop
     running = True
@@ -44,7 +45,7 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
     
         game.pop("player1Id")
         game.pop("player2Id")
-        newGame = updateField(game)
+        newGame, player = updateField(game, player)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -60,10 +61,11 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
                         game["waitingListPlayer1"] = []
                     if type(game["waitingListPlayer1"]) == str:
                         game["waitingListPlayer1"] = ast.literal_eval(game["waitingListPlayer1"])
-                    if len(game["waitingListPlayer1"]) < 5:
+                    if len(game["waitingListPlayer1"]) < 5 and player.gold >= troopData["cost"]:
+                        player.gold -= troopData["cost"]
                         game["waitingListPlayer1"].append([1, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
                     else:
-                        print("You can't have more than 5 troops waiting")
+                        print("You can't buy this troop or waiting list is full")
                 elif (mouse_pos[0] > screen_width // 3.15 - buttonSize and mouse_pos[0] < screen_width // 3.15 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
                     # Clicked on troop 2 (medium weight)
                     idTroop = 2 + ((int(game["player1Civilization"]) -1) * 3)
@@ -72,53 +74,56 @@ def game(gameWindow, screen_width, screen_height, idGame, idPlayer):
                         game["waitingListPlayer1"] = []
                     if type(game["waitingListPlayer1"]) == str:
                         game["waitingListPlayer1"] = ast.literal_eval(game["waitingListPlayer1"])
-                    if len(game["waitingListPlayer1"]) < 5:
+                    if len(game["waitingListPlayer1"]) < 5 and player.gold >= troopData["cost"]:
+                        player.gold -= troopData["cost"]
                         game["waitingListPlayer1"].append([1, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
                     else :
-                        print("You can't have more than 5 troops waiting")
+                        print("You can't buy this troop or waiting list is full")
                 elif (mouse_pos[0] > screen_width // 2.8 - buttonSize and mouse_pos[0] < screen_width // 2.8 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
                     # Clicked on troop 3 (heavy weight)
                     idTroop = 3 + (int(game["player1Civilization"] -1) * 3)
                     troopData = troops[idTroop-1]
+                    print("######################################")
+                    print(idTroop)
+                    print(troopData)
+                    print("######################################")
                     if game["waitingListPlayer1"] == None:
                         game["waitingListPlayer1"] = []
                     if type(game["waitingListPlayer1"]) == str:
                         game["waitingListPlayer1"] = ast.literal_eval(game["waitingListPlayer1"])
-                    if len(game["waitingListPlayer1"]) < 5:
+                    if len(game["waitingListPlayer1"]) < 5 and player.gold >= troopData["cost"]:
+                        player.gold -= troopData["cost"]
                         game["waitingListPlayer1"].append([1, idTroop, troopData["type"], troopData["hp"], troopData["damage"]])
                     else :
-                        print("You can't have more than 5 troops waiting")
+                        print("You can't buy this troop or waiting list is full")
                 elif (mouse_pos[0] > screen_width // 1.56 - buttonSize and mouse_pos[0] < screen_width // 1.56 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
                     # New era 
-                    if game["player1Civilization"] < 4 and xp >= civilizations[game["player1Civilization"]]["xp"]:
-                        xp -= civilizations[game["player1Civilization"]]["xp"]
+                    if game["player1Civilization"] < 4 and player.xp >= civilizations[game["player1Civilization"]]["cost"]:
+                        player.xp -= civilizations[game["player1Civilization"]]["cost"]
                         game["player1Civilization"] += 1
                     else:
-                        print("You can't have more than 4 eras")
+                        print("You can't have more than 4 eras or you don't have enough xp")
                 elif (mouse_pos[0] > screen_width // 1.47 - buttonSize and mouse_pos[0] < screen_width // 1.47 + buttonSize) and (mouse_pos[1] > screen_height * 4 // 4.1 - buttonSize // 2 and mouse_pos[1] < screen_height * 4 // 4.1 + buttonSize):
                     # Special attack
-                    if game["specialAttack"] == True:
-                        game["specialAttack"] = False
+                    if game["specialAttack"] == False:
+                        game["specialAttack"] = True
                     else:
                         print("You can't use the special attack yet")
         
-        print(game["waitingListPlayer1"])
-        # print(game)
-        # Update the game field
-        print("--------------New Game-----------------------")
-        print(newGame)
 
-        print("--------------Updating Game-----------------------")
-        # newGame["field"] = 
+        print("--------------Waiting List-----------------------")
+        print(game["waitingListPlayer1"])
+
+        print("--------------XP and Gold-----------------------")
+        print(player.gold)
+        print(player.xp)
+
+        print("--------------Passive income-----------------------")
+        player.passive_income(game["player1Civilization"])
+
         updateData(newGame)
-        # # print(game)
-        # game["player1HPCamp"] = 2500
-        # print("-----------------")
-        # print(game)
-        # print("-----------------")
-        
-        # running = False
-        sleep(0.5)
+
+        sleep(1)
 
     # Quit the game
     pygame.quit()

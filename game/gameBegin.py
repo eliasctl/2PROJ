@@ -3,7 +3,7 @@ import requests
 
 # Logical function to create the game with the API
 def gameBegin(idPlayer):
-    url = "http://eliascastel.ddns.net:3001/game?player=" + idPlayer
+    url = "http://eliascastel.ddns.net:3001/game?player=" + str(idPlayer)
     try:
         response = requests.post(url)  # Make a POST request with JSON data
         # Handle the response as needed
