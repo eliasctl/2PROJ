@@ -26,7 +26,7 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
 
     startTime = datetime.datetime.strptime(game["startTime"], "%Y-%m-%d %H:%M:%S")
 
-    while datetime.datetime.now() < startTime + datetime.timedelta(seconds=20):
+    while datetime.datetime.now() < startTime + datetime.timedelta(seconds=2):
         print("Waiting for the game to start")
         print(datetime.datetime.now())
         pass
@@ -138,6 +138,9 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
         player.passive_income(game["player1Civilization"])
         print(player.xp)
         print(player.gold)
+
+        print("--------------Field-----------------------")
+        print(game["field"])
 
         updateData(game)
 
