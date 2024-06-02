@@ -19,16 +19,15 @@ from .joinGame import joinGame
 
 def gameMultiplayer(gameWindow, screen_width, screen_height, idGame, idPlayer, join):
 
+    game = getData(idGame)
     if join:
         joinGame(idPlayer, idGame)
-    
-    # Wait for the second player
-    if join == False:
-        game = getData(idGame)
-        while game["player2Id"] == None:
+    else:
+        while type(game["player2Id"]) != int:
             print("Waiting for the second player")
-            sleep(1)
             game = getData(idGame)
+            sleep(1)
+
             
     gameWindow, screen_width, screen_height = init()
 
