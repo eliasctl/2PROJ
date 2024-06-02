@@ -23,6 +23,8 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
 
     game = getData(idGame)
 
+    startTime = datetime.datetime.strptime(game["startTime"], "%Y-%m-%d %H:%M:%S")
+
     # Wait until startTime + 20 seconds
     while datetime.datetime.now() < startTime + datetime.timedelta(seconds=20):
         print("Waiting for the game to start")
@@ -46,7 +48,7 @@ def gameMultiplayerJoin(gameWindow, screen_width, screen_height, idGame, idPlaye
     while running:
         game = getData(idGame)
         player.gold = game["player2Gold"]
-        player.xp = game["player2Xp"]
+        player.xp = game["player2XP"]
         for element in game:
             if type(game[element]) == str:
                 game[element] = ast.literal_eval(game[element])
