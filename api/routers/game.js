@@ -75,11 +75,46 @@ game.put('/joinGame', async (req, res) => {
 });
 
 game.put('/data', async (req, res) => {
+    console.log(req.query);
+    if (req.query.field === undefined || req.query.field === null || req.query.field === '' || req.query.field === 'None') {
+        req.query.field = null;
+    }
+    if (req.query.player1SpecialCapacity === undefined || req.query.player1SpecialCapacity === null || req.query.player1SpecialCapacity === '' || req.query.player1SpecialCapacity === 'None') {
+        req.query.player1SpecialCapacity = null;
+    }
+    if (req.query.player2SpecialCapacity === undefined || req.query.player2SpecialCapacity === null || req.query.player2SpecialCapacity === '' || req.query.player2SpecialCapacity === 'None') {
+        req.query.player2SpecialCapacity = null;
+    }
+    if (req.query.player1Turrets1 === undefined || req.query.player1Turrets1 === null || req.query.player1Turrets1 === '' || req.query.player1Turrets1 === 'None') {
+        req.query.player1Turrets1 = null;
+    }
+    if (req.query.player1Turrets2 === undefined || req.query.player1Turrets2 === null || req.query.player1Turrets2 === '' || req.query.player1Turrets2 === 'None') {
+        req.query.player1Turrets2 = null;
+    }
+    if (req.query.player1Turrets3 === undefined || req.query.player1Turrets3 === null || req.query.player1Turrets3 === '' || req.query.player1Turrets3 === 'None') {
+        req.query.player1Turrets3 = null;
+    }
+    if (req.query.player2Turrets1 === undefined || req.query.player2Turrets1 === null || req.query.player2Turrets1 === '' || req.query.player2Turrets1 === 'None') {
+        req.query.player2Turrets1 = null;
+    }
+    if (req.query.player2Turrets2 === undefined || req.query.player2Turrets2 === null || req.query.player2Turrets2 === '' || req.query.player2Turrets2 === 'None') {
+        req.query.player2Turrets2 = null;
+    }
+    if (req.query.player2Turrets3 === undefined || req.query.player2Turrets3 === null || req.query.player2Turrets3 === '' || req.query.player2Turrets3 === 'None') {
+        req.query.player2Turrets3 = null;
+    }
+    if (req.query.waitingListPlayer1 === undefined || req.query.waitingListPlayer1 === null || req.query.waitingListPlayer1 === '' || req.query.waitingListPlayer1 === 'None') {
+        req.query.waitingListPlayer1 = null;
+    }
+    if (req.query.waitingListPlayer2 === undefined || req.query.waitingListPlayer2 === null || req.query.waitingListPlayer2 === '' || req.query.waitingListPlayer2 === 'None') {
+        req.query.waitingListPlayer2 = null;
+    }
     try {
         const connection = await mysql.createConnection(dbConfig);
         await connection.execute('UPDATE game SET player1Civilization = ?, player2Civilization = ?, player1HPCamp = ?, player2HPCamp = ?, field = ?, player1SpecialCapacity = ?, player2SpecialCapacity = ?, player1Turrets1 = ?, player1Turrets2 = ?, player1Turrets3 = ?, player2Turrets1 = ?, player2Turrets2 = ?, player2Turrets3 = ?, waitingListPlayer1 = ?, waitingListPlayer2 = ? WHERE id = ?', [req.query.player1Civilization, req.query.player2Civilization, req.query.player1HPCamp, req.query.player2HPCamp, req.query.field, req.query.player1SpecialCapacity, req.query.player2SpecialCapacity, req.query.player1Turrets1, req.query.player1Turrets2, req.query.player1Turrets3, req.query.player2Turrets1, req.query.player2Turrets2, req.query.player2Turrets3, req.query.waitingListPlayer1, req.query.waitingListPlayer2, req.query.id]);
         res.status(200).json({ message: 'Data updated' });
     } catch (error) {
+        console.log(error);
         res.status(400).json({ error: 'Bad request' });
     }
 });

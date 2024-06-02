@@ -115,26 +115,6 @@
         "description": "",
         "parameters": [
           {
-            "name": "player1Civilization",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "player2Civilization",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "player1HPCamp",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "player2HPCamp",
-            "in": "query",
-            "type": "string"
-          },
-          {
             "name": "field",
             "in": "query",
             "type": "string"
@@ -186,6 +166,26 @@
           },
           {
             "name": "waitingListPlayer2",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1Civilization",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2Civilization",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player1HPCamp",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "player2HPCamp",
             "in": "query",
             "type": "string"
           },
