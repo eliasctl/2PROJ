@@ -96,7 +96,7 @@ def gameMultiplayerCreate(gameWindow, screen_width, screen_height, idGame, idPla
 
         rightLifeText = font.render(str(game["player2HPCamp"]), True, (255, 255, 255))
         rightLifeTextRect = rightLifeText.get_rect(center=(screen_width - screen_width // 7.2, screen_height // 1.3))
-        pygame.draw.rect(gameWindow, (128, 128, 128), rightLifeText)
+        pygame.draw.rect(gameWindow, (128, 128, 128), rightLifeTextRect)
         gameWindow.blit(rightLifeText, rightLifeTextRect)
 
         # Drawing infos xp and gold
